@@ -1,0 +1,84 @@
+﻿@model IEnumerable<HotelCloudBedSystem.Models.AppUser>
+@{
+    ViewData["Title"] = "AllUserList";
+}
+
+<section class="content-header">
+    <h1>
+        UsersList
+        <small>AccountRequest</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Tables</a></li>
+        <li class="active">Data tables</li>
+    </ol>
+</section>
+<div class="box-body" id="Alluserlist">
+    <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+        <div class="row">
+
+            <div class="text-center" style="margin-top:30px;margin-left:-400px;">
+
+                @Html.Partial("Pages", Model)
+
+            </div>
+            @*<div style="margin-left:-180px;">
+                @await Component.InvokeAsync("HotelCloudBedSystem.Areas.Admin.ViewComponents.UserSearchByRole")
+            </div>*@
+
+            <div class="col-sm-12">
+                @if (Model == null)
+                {
+                    <div class="alert alert-warning">
+                        Empty Data Found..
+                    </div>
+                }
+                else
+                {
+                    <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info" style="margin-top:25px;">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 150px;">Manager</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 180px;">EMail Address</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 130px;">Phone No</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 150px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+
+                            <tr role="row" class="odd">
+                                <td class="sorting_1">@user.FirstName @user.LastName</td>
+                                <td>@user.Email</td>
+                                <td>@user.PhoneNumber</td>
+                                <td>
+                                    <a class="btn btn-info " id="updateuser" asp-area="Admin" asp-controller="AccountRequest" asp-action="Detail" asp-route-id="@user.Id" style="margin-left:-50px;">
+                                        Detail
+                                    </a>
+                                    <a class="btn btn-success " asp-area="Admin" asp-controller="RequestAccept" asp-action="Index" asp-route-id="@user.Id">
+                                        Accept
+                                    </a>
+                                </td>
+                            </tr>
+                            }
+
+
+
+                        </tbody>
+
+                    </table>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center" style="margin-top:15px;margin-left:-400px;">
+    @Html.Partial("Pages", Model)
+</div>
+
+
+

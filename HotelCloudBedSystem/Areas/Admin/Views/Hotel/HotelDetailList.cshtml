@@ -1,0 +1,134 @@
+﻿
+@model HotelCloudBedSystem.Areas.Admin.ViewModels.HotelListViewModel
+
+@{
+
+}
+<section class="content-header">
+    <h1>
+        Hotel Profile
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Examples</a></li>
+        <li class="active">Hotel Profile</li>
+    </ol>
+</section>
+<div class="row" style="margin-left:-5px;">
+    <div class="col-md-3">
+
+        <!-- Profile Image -->
+        <div class="box box-primary" style="width:340px;">
+            <div class="box-body box-profile">
+                @if (Model.Hotelimage == null)
+                {
+
+                    <img src="~/dist/img/hotel.jpg" style="width:300px;height:300px;margin-left:10px;" alt="woman avatar">
+                }
+                else
+                {
+                    var base64 = Convert.ToBase64String(Model.Hotelimage);
+                    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                    <img src='@imgsrc' style="width:130px;height:130px;margin-left:45px;" class="img-circle" alt="User Image">
+                    @*<img id="adminpicture" src='@imgsrc' alt="woman avatar">*@
+                }
+
+                <h3 class="profile-username text-center">@Model.HotelName</h3>
+
+                <p class="text-muted text-center">@Model.Manager</p>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+        <!-- About Me Box -->
+        <div class="box box-primary" style="width:1060px;">
+            <div class="box-header with-border">
+                <h3 class="box-title">@Model.HotelName Address Info</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <strong><i class="fa fa-book margin-r-5"></i>Address</strong>
+
+                <p class="text-muted">
+                    @Model.Address
+                </p>
+
+                <hr>
+
+                <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+
+                <p class="text-muted">@Model.HotelCity</p>
+
+                <hr>
+
+                <strong><i class="fa fa-map-signs margin-r-5"></i> Hotel Description</strong>
+                
+                <p class="text-muted">@Model.Description</p>
+
+                <hr>
+
+
+
+                <hr>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-9">
+        <div class="nav-tabs-custom" style="width:650px;margin-left:130px;">
+            <div class="tab-content">
+
+                <div id="settings">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">Hotel Name</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputName" disabled placeholder="FirstName" asp-for="HotelName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-sm-2 control-label" asp-for="HotelCity">HotelCity</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputEmail" disabled placeholder="Email" asp-for="HotelCity">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">No Of Floors</label>
+
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="inputName" disabled placeholder="Email" asp-for="NoOfFloors">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSkills" class="col-sm-2 control-label">No Of Rooms</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputSkills" disabled placeholder="PhoneNo" asp-for="NoOfRooms">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSkills" class="col-sm-2 control-label">Manager</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputSkills" disabled placeholder="EmailConfirmed" asp-for="Manager">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+        </div>
+        <!-- /.nav-tabs-custom -->
+    </div>
+</div>
+
+<div class="modal" id="profilePicmodal">
+
+</div>
+

@@ -1,0 +1,118 @@
+﻿
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="content-wrapper" style="min-height: 960px;margin-left:-10px;min-width:100px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Dashboard
+            <small>Version 2.0</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Dashboard</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!-- Info boxes -->
+        <div class="row">
+
+            @await Component.InvokeAsync("HotelCloudBedSystem.Areas.Manager.ViewComponents.ManagerDashBoardCount")
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h1 class="box-title"><i class="fa fa-hotel"> Hotel Info</i></h1>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-wrench"></i>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </div>
+                            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="row">
+
+
+                            @await Component.InvokeAsync("HotelCloudBedSystem.Areas.Manager.ViewComponents.FloorList")
+
+
+
+                            <!-- /.col -->
+                            <!--fjwhgwejrgjheoiroglgneojgiegieojrgoejro-->
+                            @await Component.InvokeAsync("HotelCloudBedSystem.Areas.Manager.ViewComponents.HotelRoom")
+
+                            <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- ./box-body -->
+                    <div class="box-footer">
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.box-footer -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        <!-- Main row -->
+        <div class="row">
+            <!-- Left col -->
+            <div class="col-md-8" style="width:1100px;">
+                <!-- MAP & BOX PANE -->
+                <div class="box box-success">
+                    <!-- /.box-header -->
+                    <div class="box-body no-padding" style="left:300px;">
+                        @*@await Component.InvokeAsync("HotelCloudBedSystem.Areas.Admin.ViewComponents.PieChart")*@
+
+                        <!-- /.col -->
+                        <!-- /.row -->
+                    </div>
+
+                    <div class="box-body no-padding" style="left:300px;">
+                        @*@await Component.InvokeAsync("HotelCloudBedSystem.Areas.Admin.ViewComponents.HotelList")*@
+
+                        <!-- /.col -->
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box --
+                <!-- /.row -->
+                <!-- TABLE: LATEST ORDERS -->
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+</div>
+

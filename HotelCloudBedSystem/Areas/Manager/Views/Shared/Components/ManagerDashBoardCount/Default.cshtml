@@ -1,0 +1,112 @@
+﻿@model HotelCloudBedSystem.Areas.Manager.ViewModels.ManagerDashboardCountViewModel
+
+@{
+
+    Layout = null;
+}
+
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a asp-area="Manager" asp-controller="HotelFloors" asp-action="Index">
+        <div class="info-box">
+
+            <span class="info-box-icon bg-aqua"><i class="ion ion-android-phone-landscape"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Floors</span>
+                <span class="info-box-number">@Model.TotalFloors</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </a>
+   
+    <!-- /.info-box -->
+</div>
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a asp-area="Manager" asp-controller="HotelRooms" asp-action="Index">
+        <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="fa fa-bed"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Rooms</span>
+                <span class="info-box-number">@Model.hotelTotalRooms</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </a>
+   
+    <!-- /.info-box -->
+</div>
+<!-- /.col -->
+<!-- fix for small devices only -->
+<div class="clearfix visible-sm-block"></div>
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a asp-area="Manager" asp-controller="HotelRooms" asp-action="BookedRooms">
+        <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="ion ion-locked"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">BookedRooms</span>
+                <span class="info-box-number">@Model.HotelBookedRooms</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </a>
+ 
+    <!-- /.info-box -->
+</div>
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a asp-area="Manager" asp-controller="HotelRooms" asp-action="UnBookedRooms">
+        <div class="info-box">
+            <span class="info-box-icon bg-aqua-gradient"><i class="ion ion-unlocked"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">UnBooked</span>
+                <span class="info-box-number">@Model.HotelNotBookedRooms</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </a>
+  
+    <!-- /.info-box -->
+</div>
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a asp-area="Manager" asp-controller="Reservation" asp-action="Index">
+        <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-mobile"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Total Reservation</span>
+                <span class="info-box-number">@Model.HotelTotalReservation</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </a>
+  
+    <!-- /.info-box -->
+</div>
+
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a>
+        <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-credit-card"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Total Payment</span>
+                <span class="info-box-number">@Model.HotelPaymentCount</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </a>
+   
+    <!-- /.info-box -->
+</div>
+
+
+
+<!-- /.col -->

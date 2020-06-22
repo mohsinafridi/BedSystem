@@ -1,0 +1,332 @@
+﻿@model HotelCloudBedSystem.ViewModels.PaymentViewModel
+@using Microsoft.Extensions.Options
+@inject IOptions<HotelCloudBedSystem.Utility.StripSetting> Stripe
+@{
+    ViewData["Title"] = "Hotelreservtion";
+}
+
+
+<style>
+    #boldd {
+        color: #02598f;
+    }
+</style>
+<span style="color:dimgray;top:130px;
+margin-left:100px;position:absolute;font-size:18px;font-weight:500">
+    It takes just <b id="boldd">2 minutes</b>
+    to secure this great deal! <b id="boldd">No account needed.</b>
+</span>
+<div class="col">
+
+    <div class="row">
+        <div class="col-5">
+            <img src="~/image/hotel2.jpg"
+                 style="width:400px;height:200px;margin-left:100px;margin-top:80px" />
+        </div>
+        <div class="col-5" style="margin-top:100px;margin-left:-30px">
+            <span style="font-weight:600;font-size:22px">@Model.hotelName Hotel</span>
+            <br />
+
+            <span style="color:coral;font-weight:500; font-size:16px;">@Model.HotelStar Stars Hotel</span>
+            <br />
+            <br />
+            <span style="color:#02598f;font-weight:500; font-size:16px;">@Model.HotelAddress</span>
+
+        </div>
+    </div>
+
+    <div class="row" style="margin-left:90px;margin-top:60px">
+        <div class="col-5">
+            <section>
+                <div class="card text-white  mb-3" style="max-width: 25rem;">
+                    <div class="card-header"
+                         style="background-color:#EDE9E4;color:#02598f">
+                        <span style="font-weight:500;font-size:20px">
+                            Price Card
+                        </span>
+                    </div>
+                    <div class="card-body" style="background-color:#EDE9E4">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-8">
+                                    <span style="font-weight:600;font-size:20px;margin-top:10px;
+                                    color:dimgrey">@Model.Roomname Room</span>
+                                </div>
+                                <div class="col-3" style="margin-top: -13px
+">
+                                    <div class="container"
+                                         style="width:100px;height:60px;background-color:coral;margin-right:15px">
+                                        <span style="        color: white;
+        font-weight: 500
+">
+                                            <span style="font-size:18px">Rs @Model.Price</span> per night
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <span style="color:coral;font-weight:500">
+                                @Model.HotelCity City
+                            </span>
+                            <br />
+
+                            <span style="color:#02598f;font-weight:500; font-size:16px;">
+                                @Model.HotelAddress
+                            </span>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-6">
+                                <span style="color:grey;margin-left:11px">
+                                    Room Cost
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:black;margin-left:70px;font-weight:500">
+                                    Rs @Model.Price.00
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-6">
+                                <span style="color:grey;margin-left:11px">
+                                    1 Night Price
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:coral;margin-left:70px;font-weight:500">
+                                    Rs @Model.Price.00
+                                </span>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-6">
+                                <span style="color:grey;margin-left:11px">
+                                    1 Room x @Model.NoOfDays Night
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:coral;margin-left:70px;font-weight:500">
+                                    Rs @Model.TotalPrice.00
+                                </span>
+                            </div>
+                        </div>
+                        <hr />
+
+                        <span style="font-weight:500;
+                           font-size:19px;color:#02598f;margin-left:10px">Free From Taxes</span>
+
+                        <hr />
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-6">
+                                <span style="color:grey;margin-left:11px">
+                                    Resort Fee
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:coral;margin-left:70px;font-weight:500">
+                                    Rs 00.00
+                                </span>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row"
+                             style="margin-top:20px;">
+
+                            <div class="col-6">
+                                <span style="color:#02598f;margin-left:11px;
+                                 font-weight:600;font-size:21px;margin-top:30px">
+                                    Total Charges
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:coral;margin-left:70px;font-weight:500">
+                                    Rs @Model.TotalPrice.00
+                                </span>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        @*..................................................*@
+        <div class="col-7">
+            <section>
+                <div class="card text-white  mb-3" style="max-width: 43rem;">
+                    <div class="card-header"
+                         style="background-color:#EDE9E4;
+                          color:#02598f;font-weight:500;font-size:20px">Reservation Card (info)</div>
+                    <div class="card-body" style="background-color:#EDE9E4">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-8">
+                                    <span style="font-weight:600;font-size:20px;margin-top:10px;
+                                    color:dimgrey">@Model.Roomname Room</span>
+                                </div>
+
+                            </div>
+
+                            <span style="color:coral;font-weight:500">
+                                Room No @Model.RoomNo
+                            </span>
+                            <br />
+
+                            <span style="color:#02598f;font-weight:500; font-size:16px;">
+                                @Model.HotelAddress
+                            </span>
+                        </div>
+                        <hr />
+
+                        <div class="row">
+                            <div class="col-6">
+                                <span style="color:grey;margin-left:11px">
+                                    UserName
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:black;margin-left:70px;font-weight:500">
+                                    @Model.UserName
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-6">
+                                <span style="color:grey;margin-left:11px">
+                                    User PhoneNo
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:coral;margin-left:70px;font-weight:500">
+                                    @Model.PhoneNo
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-6">
+                                <span style="color:grey;margin-left:11px">
+                                    User CNic
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:coral;margin-left:70px;font-weight:500">
+                                    @Model.Cnic
+                                </span>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-6">
+                                <span style="color:grey;margin-left:11px">
+                                    User Email
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:coral;margin-left:70px;font-weight:500">
+                                    @Model.Email
+                                </span>
+                            </div>
+                        </div>
+
+
+
+                        <hr />
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-6">
+                                <span style="color:grey;margin-left:11px">
+                                    City
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:coral;margin-left:70px;font-weight:500">
+                                    @Model.UserCity  || ZipCode ::@Model.ZipCode
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-6">
+                                <span style="color:grey;margin-left:11px">
+                                    User Address
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:coral;margin-left:70px;font-weight:500">
+                                    @Model.Address
+                                </span>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-6">
+                                <span style="color:grey;margin-left:11px">
+                                    Checkin Date
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:coral;margin-left:70px;font-weight:500">
+                                    @Model.ChkIndate.Date
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-6">
+                                <span style="color:grey;margin-left:11px">
+                                    Ckeckout Date
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:coral;margin-left:70px;font-weight:500">
+                                    @Model.ChkOutdate.Date
+                                </span>
+                            </div>
+                        </div>
+                        @{
+                            var amount = Model.TotalPrice * 100;
+                        }
+                        <hr />
+                        
+                         
+                        
+                        <form asp-area="" asp-controller="HotelPayment" asp-action="payment"
+                              method="post">
+                            @Html.HiddenFor(model => model.ReservationId)
+                            @Html.HiddenFor(model => model.TotalPrice)
+                            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                    data-key="@Stripe.Value.publishedKey"
+                                    data-amount="@amount"
+                                    data-name="Hotel Network"
+                                    data-description="the way to go"
+                                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                                    data-locale="auto"
+                                    data-zip-code="true"
+                                    data-allow-remember-me="true"
+                                    data-label="Confirm payment">
+                            </script>
+                            <script>
+                                document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+                            </script>
+                            <button 
+                                    style="width:647px;color:white;
+                                height:47px;font-weight:500;background-color:#02598f" id="Subbtn">
+                                <img src="~/image/cellphone.png" style="width:32px;height:32px" />  Confirm Payment
+                            </button>
+                        </form>
+                       
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </div>
+</div>
+

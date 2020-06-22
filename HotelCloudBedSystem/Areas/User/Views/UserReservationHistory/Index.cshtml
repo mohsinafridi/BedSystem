@@ -1,0 +1,49 @@
+﻿@model IEnumerable<HotelCloudBedSystem.Areas.User.ViewModels.UserReservationViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div>
+    <h2 style="margin-top: 0px;margin-left: 50px;">
+        <i class="fa fa-history" aria-hidden="true" style="color:#922B21"></i>
+        <b style="margin-left: 3px;color:#D4AC0D"> Reservation History</b>
+    </h2>
+    <hr style="margin-top: 0rem;">
+</div>
+
+@if (Model.Count() == 0)
+{
+    <div class="alert alert-warning">
+        Empty Reservation History
+    </div>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Res_Id</th>
+                <th scope="col">HotelName</th>
+                <th scope="col">RoomName</th>
+                <th scope="col">Check_In</th>
+                <th scope="col">Check_Out</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var res in Model)
+            {
+                <tr>
+                    <th scope="row">@res.ReservationId</th>
+                    <td>@res.HotelName</td>
+                    <td>@res.RoomName</td>
+                    <td>@res.CheckIn</td>
+                    <td>@res.CheckOut</td>
+                    <td>
+                    </td>
+                </tr>
+
+            }
+
+        </tbody>
+    </table>
+}

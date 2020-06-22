@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - HotelCloudBedSystem</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/bower_components/font-awesome/css/font-awesome.min.css">
+
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body style="background-color:#EDE9E4">
+    <header>
+        <nav class="navbar navbar-light  navbar-expand-sm navbar-toggleable-sm   border-bottom box-shadow mb-3"
+             style="background-color:white">
+            <div class="container">
+                <a asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="~/image/travel.png" style="height:45px;width:50px" />
+                </a>
+
+                <p style="font-weight:bold;margin-left:5px;color:#02598f">Hotel Network</p>
+                <p style="font-style:italic;margin-top:40px;margin-left:-105px;color:#D4AC0D">the way to go</p>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    @*<partial name="_LoginPartial" />*@
+                    <ul class="navbar-nav flex-grow-1">
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <section class="sidebar" style="margin-top: 0px;width:270px;margin-left:40px;margin-top:30px">
+        <div class="card bg-light mb-3" style="max-width: 22rem;margin-top:100px;margin-left: -15px;">
+            <div class="card-header  text-center" style="background-color:white">
+                <h4 style="color: white;">
+                    <i class="fa fa-user-circle" style="color:#922B21"></i> <span style="color:#D4AC0D">User Panel</span>
+                </h4>
+            </div>
+            <div class="card-body" style="background-color:white;width:280px">
+                <nav class="col-sm-7 col-md-12 d-none d-sm-block  sidebar">
+                    <ul class="nav nav-pills flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" style="color:grey" asp-area="User" asp-controller="Home" asp-action="Index" routerLinkActive="active">
+                                <i class="fa fa-id-card" aria-hidden="true" style="color:#922B21"></i> <strong>User Profile</strong>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color:grey" asp-area="User" asp-controller="UserActiveReservation" asp-action="Index" routerLinkActive="active">
+                                <i class="fa fa-car" style="color:#922B21"></i><strong> Active Reservation</strong>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color:grey" asp-area="User" asp-controller="UserReservationHistory" 
+                               asp-action="Index" routerLinkActive="active">
+                                <i class="fa fa-car" style="color:#922B21"></i><strong> Reservation History</strong>
+                            </a>
+                        </li>
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" style="color:grey" routerLinkActive="active"
+                               asp-area="Identity" asp-page="/Account/Manage/Index">
+                                <i class="fa fa-key" aria-hidden="true" style="color:#922B21"></i> <strong>Account Setting</strong>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                                <button type="submit" style="color:grey" class="nav-link btn btn-link">
+
+                                    <i class="fa fa-sign-out" style="color:#922B21"></i> <strong>Logout</strong>
+
+                                </button>
+                            </form>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </section>
+
+    <div class="container" style="margin-left:313px;width:1020px;margin-top:-370px;">
+
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    @*<footer class="border-top footer text-muted">*@
+
+    <!-- Footer -->
+    <footer class="page-footer font-small indigo 
+            " style="color:#5D6D7E;margin-top:250px;background-color:white">
+
+        <!-- Footer Links -->
+        <div class="container">
+
+            <!-- Grid row-->
+            <div class="row text-center d-flex justify-content-center pt-5 mb-3 ">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mb-3">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <a href="#!" style="color:#5D6D7E">About us</a>
+                    </h6>
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-2 mb-3">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <a href="#!" style="color:#5D6D7E">Products</a>
+                    </h6>
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-2 mb-3">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <a href="#!" style="color:#5D6D7E">Awards</a>
+                    </h6>
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-2 mb-3">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <a href="#!" style="color:#5D6D7E">Help</a>
+                    </h6>
+                </div>
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-2 mb-3">
+                    <h6 class="text-uppercase font-weight-bold">
+                        <a href="#!" style="color:#5D6D7E">Contact</a>
+                    </h6>
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row-->
+            <hr class="rgba-white-light" style="margin: 0 15%;">
+
+            <!-- Grid row-->
+            <div class="row d-flex text-center justify-content-center mb-md-0 mb-4">
+
+                <!-- Grid column -->
+                <div class="col-md-8 col-12 mt-5">
+                    <p style="line-height: 1.7rem">
+                        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                        accusantium doloremque laudantium, totam rem
+                        aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
+                        explicabo.
+                        Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur.
+                    </p>
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row-->
+            <hr class="clearfix d-md-none rgba-white-light" style="margin: 10% 15% 5%;">
+
+            <!-- Grid row-->
+            <div class="row pb-3">
+
+                <!-- Grid column -->
+                <div class="col-md-12">
+
+                    <div class="mb-5 flex-center text-center">
+                        <h4>
+                            <a class="fb-ic">
+                                <i class="fa fa-facebook-square fa-lg white-text mr-4"> </i>
+                            </a>
+                            <!-- Twitter -->
+                            <a class="tw-ic">
+                                <i class="fa fa-twitter-square fa-lg white-text mr-4"> </i>
+                            </a>
+                            <!-- Google +-->
+                            <a class="gplus-ic">
+                                <i class="fa fa-google-plus-official fa-lg white-text mr-4"> </i>
+                            </a>
+                            <!--Linkedin -->
+                            <a class="li-ic">
+                                <i class="fa fa-linkedin-square fa-lg white-text mr-4"> </i>
+                            </a>
+                            <!--Instagram-->
+                            <a class="ins-ic">
+                                <i class="fa fa-instagram fa-lg white-text mr-4"> </i>
+                            </a>
+                            <!--Pinterest-->
+                            <a class="pin-ic">
+                                <i class="fa fa-pinterest fa-lg white-text"> </i>
+                            </a>
+
+                        </h4>
+                        <!-- Facebook -->
+
+                    </div>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row-->
+
+        </div>
+        <!-- Footer Links -->
+        <!-- Copyright -->
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
+        </script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

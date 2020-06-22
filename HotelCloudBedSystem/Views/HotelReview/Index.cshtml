@@ -1,0 +1,134 @@
+﻿@model HotelCloudBedSystem.ViewModels.HotelDetailViewModel
+
+@{
+    ViewData["Title"] = "Hotel Review";
+}
+<style>
+    .accountbtn {
+        /* Green */
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border: 1px solid #6d7b84;
+    }
+
+    .reviewtbtn {
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border: 1px solid #6d7b84;
+    }
+</style>
+@*@await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.MainLogo")*@
+    <div class="col" style="        margin-top: 80px;
+        margin-left: 80px">
+        <h4 style="color:black">@Model.HotelName Hotel</h4>
+        <p style="font-weight:500;color:dimgray">@Model.ReviewStar Stars Hotel</p>
+        <p style="font-weight:500;color:#02598f">@Model.Address</p>
+        <div class="row" >
+
+            @await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.ViewRoomForm", new { hotelid = Model.HotelId, RoomTypeId = 2 })
+            <a class="col-md-2 reviewtbtn " style="width:150px;height:47px;
+           background-color:white;margin-left:20px" id="reviewbtn"
+               asp-area="" asp-controller="HotelReview" asp-action="Index" asp-route-id="@Model.HotelId">
+                <img src="~/image/hotelicon.jpg" style="width:32px;height:32px;margin-top:7px"
+                     class="float-left" /> <b style="color:#02598f;position:absolute;left:60px;top:10px"
+                                              id="stext4"> View Hotel Detail</b>
+            </a>
+        </div>
+
+    </div>
+
+<div class="row" style="margin-left:30px;margin-top:40px">
+    <div class="col-md-4">
+        @await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.HotelProfile", new { id = Model.HotelId })
+        <div style="margin-top:30px">
+            @await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.SingleHotelMap", new { city = Model.HotelCity, Hotel = Model.HotelName });
+        </div>
+    </div>
+    <div style="height:900px;width:2px;background-color:lightgrey">
+
+    </div>
+
+    <div class="col-md-8" style="margin-left:420px;margin-top:-1547px">
+
+        <div class="card shadow-sm mb-3" style="width:830px;margin-left:30px;margin-top:80px;height:230px; " id="boxshadow">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        @*<img class="card-img-top" src="~/pexels-photo-164595.jpeg" alt="Card image cap" style="height:222px;margin-top:-27px;margin-left:-27px">*@
+                        @if (Model.HotelImage == null)
+                        {
+
+                            <img src="~/dist/img/hotel.jpg" style="width:200px;height:222px;margin-left:-15px;margin-top:-15px" alt="woman avatar">
+                        }
+                        else
+                        {
+                            var base64 = Convert.ToBase64String(Model.HotelImage);
+                            var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                            <img src='@imgsrc' style="width:200px;height:222px;margin-left:-15px;margin-top:-15px" alt="User Image">
+                            @*<img id="adminpicture" src='@imgsrc' alt="woman avatar">*@
+                        }
+                    </div>
+                    <div class="col-md-5">
+                        <h5><strong style="color:#A93226;"><i class="fa fa-home"></i> @Model.HotelName</strong></h5>
+                        <div class="row">
+                           
+                            <b style="color:#A93226;margin-left:2px">
+                                @for (int i = 0; i < Model.ReviewStar; i++)
+                                {
+                                    
+                                        <i class="fa fa-star" aria-hidden="true" style="color:peru"></i>
+                                   
+                                }
+                                @Model.ReviewStar
+                            </b>
+                            <p style="color:grey;margin-left:20px">
+                                @Model.TotalReview Reviews
+                            </p>
+                        </div>
+                        <hr style="margin-left:-20px" />
+                        <div class="row">
+                            <strong style="color:#A93226">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i> @Model.HotelCity
+                            </strong>
+
+                        </div>
+                        <div class="row">
+                            <strong style="color:grey"><i class="fa fa-hotel" style="color:green"></i> No of  AVialable Rooms : @Model.FreeRoomsCount</strong>
+                        </div>
+
+                    </div>
+                    <div style="height:184px;width:1px;background-color:lightgray;margin-left:570px;margin-top:-200px"></div>
+                    <div class="col-md-4" style="margin-top:-150px;margin-left:570px">
+                        <h5><strong style="color:#D4AC0D;"><i class="fa fa-money"></i> Price Per Day/Night</strong></h5>
+                        <strong style="color:grey">our Average Price  </strong>
+                        <strong>Rs: @Model.AveragePrice</strong>
+
+
+
+                    </div>
+                  
+
+
+
+                </div>
+            </div>
+        </div>
+        <div style="        margin-top: 50px;
+        margin-left: 20px">
+            @await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.HotelReview", new { id = Model.HotelId })
+        </div>
+        
+
+    </div>
+</div>
+
+

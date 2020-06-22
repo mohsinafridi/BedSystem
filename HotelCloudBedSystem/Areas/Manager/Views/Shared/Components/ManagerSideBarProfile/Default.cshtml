@@ -1,0 +1,31 @@
+﻿@model HotelCloudBedSystem.Areas.Manager.ViewModels.ManagerProfileViewModel
+
+@{
+    Layout = null;
+}
+
+
+
+
+<div class="user-panel">
+    <div class="pull-left image" style="margin-top:4px;">
+        @if (Model.AvatarImage == null)
+        {
+
+            <img src="~/dist/img/mkhan.jpg" style="border-radius: 50%;" alt="woman avatar">
+        }
+        else
+        {
+            var base64 = Convert.ToBase64String(Model.AvatarImage);
+            var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+            <img src='@imgsrc' class="img-circle" alt="User Image">
+            @*<img id="adminpicture" src='@imgsrc' alt="woman avatar">*@
+        }
+    </div>
+    <div class="pull-left info" style="color:white">
+        <p>@Model.FirstName @Model.LastName</p>
+        <p>@Model.Email</p>
+        @*<p><b>Admin</b></p>*@
+    </div>
+</div>

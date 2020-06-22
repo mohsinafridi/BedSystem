@@ -1,0 +1,18 @@
+﻿@model HotelCloudBedSystem.Areas.Admin.ViewModels.AddUserViewModel
+@{
+    Layout = null;
+}
+
+
+
+
+<div class="m-1 p-2" style="margin-top:-33px;margin-left:700px;">
+    <form asp-area="Admin" asp-controller="CourseList" asp-action="Index" method="get" class="form-inline">
+        <label class="m-1">Search By:</label>
+        <label asp-for="@Model.UserId" class="col-form-label">Name</label>
+        <select asp-for="@Model.UserId" class="form-control" asp-items="@Model.users">
+            <option>Select From List</option>
+        </select>
+        <button class="btn btn-success m-1">Search</button>
+    </form>
+</div>

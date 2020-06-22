@@ -1,0 +1,68 @@
+﻿@model HotelCloudBedSystem.Areas.Manager.ViewModels.HotelImagesViewModel
+
+@{
+    Layout = null;
+}
+
+
+<div class="modal-dialog" id="HotelUploadPicModel" style="width:500px;height:400px;">
+    <div class="modal-content">
+        <div class="modal-header" style="background-color:#17a2b8">
+            <h5 class="modal-title" style="color:white">Update Admin <small>Profile Picture</small></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+
+            <form asp-area="Manager" asp-controller="UploadHotelImage"
+                  asp-action="_UploadImage" enctype="multipart/form-data"
+                  method="post">
+                @Html.HiddenFor(model => model.HotelId)
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger small text-uppercase" })
+                <div class="custom-file">
+                    <input type="file" asp-for="hotelimage" class="custom-file-input" id="customFile">
+                    <span asp-validation-for="hotelimage"></span>
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-danger">Reset</button>
+                </div>
+            </form>
+
+        </div><!--/col-9-->
+    </div><!--/row-->
+    <div id="kv-avatar-errors-1" class="center-block" style="width:800px;display:none"></div>
+</div>
+
+
+
+@section Scripts{
+
+    <script>
+       // vars
+$(document).ready(function() {
+
+
+    var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.avatar').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+
+    $(".file-upload").on('change', function(){
+        readURL(this);
+    });
+});
+    </script>
+}

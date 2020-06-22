@@ -1,0 +1,201 @@
+﻿@model HotelCloudBedSystem.ViewModels.HotelSerachViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.MainLogo")
+@await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.MainHotelSearch")
+
+
+<div class="row" style="margin-top:150px">
+    <div class="col-md-5" style="margin-left:100PX;margin-top:90px">
+        <h6 class="text-center">
+            <strong style="color:#02598f">
+                ABOUT US
+            </strong>
+        </h6>
+        <h2 class="text-center" style="color:#D4AC0D">
+            HOTEL NETWORK
+        </h2>
+
+        <p style="color:grey">
+            <strong>
+                Sona.com is a leading online accommodation site. We’re passionate
+                about travel. Every day, we inspire and reach millions of travelers
+            </strong>
+        </p>
+        <p class="text-center" style="color: grey">
+            <strong>
+                90 local websites in 41 languages
+            </strong>
+        </p>
+        <p style="color:grey">
+            <strong>
+                So when it comes to booking the perfect hotel, vacation
+                rental, resort
+                <span class="text-center">
+                    apartment, guest house, or tree house, we’ve got you covered Hotels.
+                </span>
+            </strong>
+
+        </p>
+
+
+    </div>
+
+
+    <div class="col-md-5" style="margin-left:35px">
+        <div class="row">
+            <div class="col-md-4" style="margin-left:50px">
+
+                <img src="~/image/himage.jpeg" style="height:400px;width:250px" />
+            </div>
+            <div class="col-md-4" style="margin-left:90px">
+
+                <img src="~/image/porte-cochere.jpg" style="height:400px;width:250px" />
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<h5 class="" style="margin-left:100px;margin-top:100px;color:#02598f"><strong>Need inspiration for your next trip?</strong></h5>
+<div class="row" style="margin-left:100px">
+    <h6 style="color:#D4AC0D"><strong> <i class="fa fa-plane"></i> Summer Trip</strong></h6> <p class="ml-2"> Explore unique hotel experiences </p>
+</div>
+
+
+    @await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.SummerHotel")
+
+
+
+
+
+<div style="margin-top:110px">
+    <h6 class="text-center">
+        <strong style="color:#02598f">
+            WHAT WE DO
+        </strong>
+
+    </h6>
+    <h2 style="color:#D4AC0D" class="text-center">
+        Discover Our Services
+    </h2>
+
+    <div class="row">
+        <div class="col-md-3" style="margin-left:130px;margin-top:90px">
+            <img src="~/image/370946.png" style="width:100px;height:70px" />
+            <h3 style="color:#D4AC0D;margin-top:10px;margin-left:-20px">TRAVEL PLAN</h3>
+            <p style="color:grey;margin-left:-70px">
+                <strong>
+                    Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit
+                    incididunt ut labore et dolore magna.
+                </strong>
+            </p>
+        </div>
+        <div class="col-md-3" style="margin-left:100px;margin-top:90px">
+            <img src="~/image/370945.png" style="width:100px;height:70px;margin-left:10px" />
+            <h3 style="color:#D4AC0D;margin-top:10px;margin-left:0px">Bar & Drink</h3>
+            <p style="color:grey;margin-left:-70px">
+                <strong>
+                    Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit
+                    incididunt ut labore et dolore magna.
+                </strong>
+            </p>
+        </div>
+
+        <div class="col-md-3" style="        margin-left: 100px;
+        margin-top: 90px">
+            <img src="~/image/370949.png" style="width:100px;height:70px;margin-left:30px" />
+            <h3 style="color:#D4AC0D;margin-top:10px;margin-left:-20px">Catering Service</h3>
+            <p style="color:grey;margin-left:-70px">
+                <strong>
+                    Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit
+                    incididunt ut labore et dolore magna.
+                </strong>
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3" style="margin-left:130px;margin-top:90px">
+            <img src="~/image/3709321.png" style="width:90px;height:70px" />
+            <h3 style="color:#D4AC0D;margin-top:10px;margin-left:-20px">Babysitting</h3>
+            <p style="color:grey;margin-left:-70px">
+                <strong>
+                    Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit
+                    incididunt ut labore et dolore magna.
+                </strong>
+            </p>
+        </div>
+        <div class="col-md-3" style="margin-left:100px;margin-top:90px">
+            <img src="~/image/370956.png" style="width:90px;height:70px;margin-left:10px" />
+            <h3 style="color:#D4AC0D;margin-top:10px;margin-left:10px">Laundry</h3>
+            <p style="color:grey;margin-left:-70px">
+                <strong>
+                    Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit
+                    incididunt ut labore et dolore magna.
+                </strong>
+            </p>
+        </div>
+
+        <div class="col-md-3" style="margin-left:100px;margin-top:90px">
+            <img src="~/image/370933.png" style="width:90px;height:70px;margin-left:10px" />
+            <h3 style="color:#D4AC0D;margin-top:10px;margin-left:0px">Hire Driver</h3>
+            <p style="color:grey;margin-left:-70px">
+                <strong>
+                    Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit
+                    incididunt ut labore et dolore magna.
+                </strong>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+
+<div style="margin-top:140px;">
+    <h5 style="margin-top:30px;margin-left:100px;color:#02598f"><strong>Need inspiration for your next trip?</strong></h5>
+    <div class="row" style="margin-left:100px">
+        <h6 style="color:#D4AC0D"><strong> <i class="fa fa-plane"></i> Winter Trip</strong></h6> <p class="ml-2"> Explore unique hotel experiences </p>
+    </div>
+    <div class="row" style="margin-left:0px">
+
+        @await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.WinterHotel")
+    </div>
+</div>
+
+
+
+
+
+@section Scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="~/js/AutoCompleteJavascript.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                var dateToday = new Date();
+                var dates = $("#start-date, #end-date").datepicker({
+                    defaultDate: "+2d",
+                    changeMonth: true,
+                    numberOfMonths: 1,
+                    minDate: dateToday,
+                    onSelect: function (selectedDate) {
+                        var option = this.id == "start-date" ? "minDate" : "maxDate",
+                            instance = $(this).data("datepicker"),
+                            date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
+                        dates.not(this).datepicker("option", option, date);
+                    }
+                });
+            });
+        });
+    </script>
+}

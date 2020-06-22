@@ -1,0 +1,206 @@
+﻿@model IEnumerable<HotelCloudBedSystem.ViewModels.AvailbleRoomsViewModel>
+@{
+    ViewData["Title"] = "Rooms";
+}
+<style>
+
+    .resbtn {
+        /* Green */
+        border: none;
+        background-color: #02598f;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin-left: 26px;
+        font-size: 16px;
+        border: 1px solid #6d7b84;
+    }
+</style>
+
+@{
+    int hotelId = 0;
+    string city = null;
+    string Hotel = null;
+    int hotelRoomtypeId = 0;
+    DateTime checkIn = new DateTime();
+    DateTime checkOut = new DateTime();
+    foreach (var hotel in Model)
+    {
+        hotelId = hotel.HotelId;
+        city = hotel.City;
+        Hotel = hotel.HotelName;
+        hotelRoomtypeId = hotel.hotelRoomTypeid;
+        checkIn = hotel.CheckIn;
+        checkOut = hotel.CheckOut;
+        break;
+    }
+}
+<div class="col" style="        margin-top: 80px;
+        margin-left: 80px">
+    <h4 style="color:black">@Hotel Hotel</h4>
+    <p style="font-weight:500;color:dimgray">4 Stars Hotel</p>
+    <p style="font-weight:500;color:#02598f">Rose Palace Hotel, Gulberg. 55-N, Gurumangat Road, Gulberg-II,, Gulburg, Lahore, Pakistan</p>
+</div>
+@await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.RoomFiltering", new
+{
+    hotelRoomtypeId = hotelRoomtypeId
+    ,
+    hotelId = hotelId,
+    checkIn = checkIn,
+    checkOut = checkOut
+})
+
+
+<div class="row" style="margin-left:30px;margin-top:50px;background-color:#EDE9E4">
+    <div class="col-md-4">
+        @await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.HotelProfile", new { id = hotelId })
+        <div style="margin-top:20px">
+            @await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.SingleHotelMap", new { city = city, Hotel = Hotel })
+        </div>
+
+    </div>
+    <div style="height:900px;width:2px;background-color:lightgrey">
+
+    </div>
+    <div class="col-md-8" style="margin-left:420px;margin-top:-1480px">
+
+        @if (Model.Count() == 0)
+        {
+            <div class="alert alert-warning">
+                Room record Not Found..
+            </div>
+        }
+        else
+        {
+
+            <div>
+
+
+                <div class="row" style="margin-left:0px;margin-top:40px">
+
+                    @foreach (var room in Model)
+                    {
+
+                        <div class="card shadow-sm mt-4" style="width: 830px;margin-left:30px;" id="boxshadow">
+                            @if (room.RoomImage == null)
+                            {
+
+                                <img src="~/dist/img/hotel.jpg" class="card-img-top" style="height:240px" alt="woman avatar">
+                            }
+                            else
+                            {
+                                var base64 = Convert.ToBase64String(room.RoomImage);
+                                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                                <img src='@imgsrc' class="card-img-top" style="height:240px" alt="User Image">
+                            }
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <p><i class="fa fa-hotel" style="color:#922B21"></i><span style="color:#D4AC0D"><strong> @room.RoomName</strong></span></p>
+                                            </div>
+                                            <div class="col-md-6" style="margin-left:0px">
+                                                <p><i class="fa fa-bullseye" style="color:#922B21"></i><span style="color:green"><strong> free</strong></span></p>
+                                            </div>
+                                        </div>
+
+
+                                        <h6><strong style="color:dimgray"><i class="fa fa-home" style="color:dimgray"></i> @room.HotelName</strong></h6>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h6><strong style="color:dimgray"><i class="fa fa-at" style="color:dimgray"></i> RoomNo:@room.RoomNo</strong></h6>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <h6><strong style="color:#D4AC0D"> <i class="fa fa-money" style="color:#922B21"></i>@room.RsperNight /Night</strong></h6>
+                                            </div>
+                                        </div>
+
+                                        <p style="color:grey">
+                                            <strong style="color:dimgray">
+                                                <i class="fa fa-map-marker" aria-hidden="true" style="color:dimgray"></i> @room.City
+                                            </strong>
+                                        </p>
+
+                                        <div class="row">
+                                            @for (int i = 0; i < room.AverageStar; i++)
+                                            {
+                                                <div style="color:peru">
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                </div>
+                                            }
+                                            <b style="color:#02598f;margin-left:2px">@room.AverageStar</b>
+                                            <p style="color:grey;margin-left:20px">
+                                                @room.totalReview Review
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div style="background-color:lightgray;width:1px;height:200px;margin-left:-20px"></div>
+                                    <div class="col-6">
+                                        @await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.RoomFacility", new { id = room.RoomId })
+
+                                        @await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.RoomReservationButtonForm", new
+                                   {
+                                       roomId = room.RoomId,
+                                       CheckInDate = checkIn,
+                                       CheckOutDate = checkOut
+                                   })
+                                    </div>
+                                </div>
+
+
+                                <strong style="color:#02598f">
+                                    Room Images
+                                </strong>
+                                <br />
+                                @await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.HotelRoomImages", new { id = room.RoomId })
+                            </div>
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+@section Scripts{
+
+    <script>
+
+        //input type range price
+        //--------------------------------
+        $(function () {
+            var Value = null;
+            var result = document.getElementById("PriceValue");
+            $("[type=range]").change(function () {
+                Value = $(this).val();
+                result.innerHTML = "PKR " + Value;
+            });
+
+            $("#Searchbtn").on('click', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                $.ajax({
+                    url: '/Dashboard/GetCoursesByPrice',
+                    type: 'GET',
+                    data: { price: Value },
+                    success: function (response) {
+                        $(".CourseList").html(response);
+                        console.log(Value);
+                        console.log("button is working");
+                    },
+                    error: function () {
+
+                    }
+
+                });
+            });
+        });
+    </script>
+}

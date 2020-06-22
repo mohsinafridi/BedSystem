@@ -1,0 +1,32 @@
+﻿@model HotelCloudBedSystem.ViewModels.RoomReservationViewModel
+
+@{
+
+}
+
+<style>
+    #Subbtn {
+        border: none;
+        background-color: #02598f;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin-left: 26px;
+        font-size: 16px;
+        border: 1px solid #6d7b84;
+    }
+</style>
+<form asp-area="" asp-controller="HotelReservation" asp-action="Hotelreservtion" method="get">
+    @Html.HiddenFor(model => model.RoomId)
+    @Html.HiddenFor(model => model.ChkIndate)
+    @Html.HiddenFor(model => model.ChkOutdate)
+
+
+    <button type="submit"
+            style="width:250px;height:47px;font-weight:500;margin-top:10px" id="Subbtn">
+        <img src="~/image/holidays.png" style="width:32px;height:32px;margin-top:7px"
+             class="float-left" /> <b style="color:white;
+           position:absolute;left:90px;top:135px"> Hotel Room Reservation</b>
+    </button>
+</form>
+

@@ -1,0 +1,61 @@
+﻿@model IEnumerable<HotelCloudBedSystem.ViewModels.HotelListViewModel>
+
+
+@if (Model.Count() ==0)
+{
+    <div class="alert alert-warning">
+        No hotel Found...
+    </div>
+}
+else
+{
+<div class="row" style="margin-left: 50px">
+
+    @foreach (var hotel in Model)
+    {
+    <div class="card shadow-sm mt-5 ml-lg-5" style="width: 16rem;height:350px;">
+
+        @if (hotel.HotelImage == null)
+        {
+
+            <img src="~/dist/img/hotel.jpg" class="card-img-top" style="height:180px" alt="woman avatar">
+        }
+        else
+        {
+            var base64 = Convert.ToBase64String(hotel.HotelImage);
+            var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+            <img src='@imgsrc' class="card-img-top" style="height:180px" alt="User Image">
+        }
+       
+        <div class="card-body">
+            <div class="col">
+                <p><i class="fa fa-bank"></i><span style="color:grey">@hotel.NoOfRooms rooms</span></p>
+                <h6><strong>@hotel.HotelName</strong></h6>
+                <p style="color:grey">
+                    <i class="fa fs"></i> <strong>
+                        <i class="fa fa-map-marker" aria-hidden="true"></i> @hotel.HotelCity
+                    </strong>
+                </p>
+
+                <div class="row">
+                    <div style="color:peru">
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                    </div>
+                    <p style="color:grey;margin-left:5px">
+                        15 Review
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+
+
+
+</div>
+}

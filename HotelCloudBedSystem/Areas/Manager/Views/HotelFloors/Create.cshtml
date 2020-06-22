@@ -1,0 +1,115 @@
+﻿
+@model HotelCloudBedSystem.Areas.Manager.ViewModels.FloorCreateViewModel
+@{
+    Layout = null;
+}
+
+
+<div class="modal-dialog" id="HotelAddModel" style="width:500px;">
+    <div class="modal-content">
+        <div class="modal-header" style="background-color:#17a2b8">
+            <h5 class="modal-title" style="color:white">Add New<small>Floors</small></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" id="UserAddForm">
+            <form asp-area="Manager" asp-controller="HotelFloors" asp-action="Create"
+                  method="post" class="FormCreate">
+                @Html.HiddenFor(model => model.HotelId)
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger small text-uppercase" })
+                <div class="form-group">
+                    <label asp-for="FloorName"></label>
+                    <input asp-for="FloorName" class="form-control" />
+                    <span asp-validation-for="FloorName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="NoOfRooms"></label>
+                    <input asp-for="NoOfRooms" class="form-control" />
+                    <span asp-validation-for="NoOfRooms" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="FloorNo"></label>
+                    <input asp-for="FloorNo" class="form-control" />
+                    <span asp-validation-for="FloorNo" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="HotelName"></label>
+                    <input asp-for="HotelName" class="form-control" />
+                    <span asp-validation-for="HotelName" class="text-danger"></span>
+                </div>
+
+
+                @*<div class="form-group">
+            <label asp-for="HotelId" class="col-form-label">Subject</label>
+            <select asp-for="HotelId" class="form-control" asp-items="Model.Hotels">
+                <option>Select From List</option>
+            </select>
+            <span asp-validation-for="HotelId" class="text-danger small text-uppercase"></span>
+        </div>*@
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-danger">Reset</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="UseraddingModal">
+
+</div>
+
+
+@section Scripts{
+    <script src="~/bootbox.min.js"></script>
+    <script>
+
+            ////$(".FormCreate").on("submit", function (e) {
+            ////$("#RoleModal").delegate(".FormCreate", "submit", function (e) {
+            //    e.preventDefault();
+            //    console.log("Button is working");
+            //    var frm = $(this);
+
+            //    $.ajax({
+            //        url: frm.attr('action'),
+            //        type: frm.attr('method'),
+            //        data: frm.serialize(),
+            //        success: function (response) {
+            //            if (response.status == true) {
+
+            //                bootbox.alert(response.message);
+
+            //                // refresh data grid
+            //                $.ajax({
+            //                    url: '/Admin/UserList/NotinRole/',
+            //                    type: 'GET',
+            //                    success: function (data) {
+            //                        $("#NotinRoleUser").html(data);
+            //                    },
+            //                    error: function () {
+
+            //                    }
+            //                });
+
+            //                // hide modal
+            //                $("#CreateModal").modal('hide');
+            //            } else {
+            //                console.warn(response.message);
+            //            }
+            //        },
+            //        error: function () {
+
+            //        }
+            //    });
+
+            //});
+    </script>
+
+}

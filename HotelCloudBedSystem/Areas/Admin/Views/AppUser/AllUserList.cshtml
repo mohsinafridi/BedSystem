@@ -1,0 +1,366 @@
+﻿@model IEnumerable<HotelCloudBedSystem.Models.AppUser>
+@{
+    ViewData["Title"] = "AllUserList";
+}
+
+<section class="content-header">
+    <h1>
+        UsersList
+        <small>All Users</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Tables</a></li>
+        <li class="active">Data tables</li>
+    </ol>
+</section>
+@{
+    string NoAsssign = "Role is Not Assign";
+
+}
+<div class="box-body" id="Alluserlist">
+    <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+        <div class="row">
+
+            <div class="text-center" style="margin-top:30px;margin-left:-650px;">
+
+                @Html.Partial("Pages", Model)
+
+            </div>
+            <div style="margin-left:-180px;">
+                @await Component.InvokeAsync("HotelCloudBedSystem.Areas.Admin.ViewComponents.UserSearchByRole")
+            </div>
+
+            <div class="form-group" style="margin-left:900px">
+                <a class="btn btn-success float-right" asp-area="Admin" asp-controller="AppUser" asp-action="AddAppUser" id="AddUserbtn">
+                    Add New User
+                </a>
+            </div>
+            <div class="col-sm-12">
+                @if (Model == null)
+                {
+                    <div class="alert alert-warning">
+                        Empty Data Found..
+                    </div>
+                }
+                else
+                {
+                    <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info" style="margin-top:25px;">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 150px;">User Name</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 180px;">EMail Address</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 130px;">Role</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 60px;margin-left:-100px;height:20px;">Account Status</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 150px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var user in Model)
+                            {
+
+                                <tr role="row" class="odd">
+                                    <td class="sorting_1">@user.FirstName @user.LastName</td>
+                                    <td>@user.Email</td>
+                                    <td>
+                                        @if (user.AppRole == null)
+                                        {
+                                            @NoAsssign
+                                        }
+                                        else
+                                        {
+                                            @user.AppRole.Name
+                                        }
+                                    </td>
+                                    @if (user.IsEnable == true)
+                                    {
+                                        <td><b style="background-color:green;color:white;margin-left:-20px;width:10px;height:10px;">Enable</b></td>
+                                    }
+                                    else
+                                    {
+                                        <td><b style="background-color:red;color:white;margin-left:-20px;width:10px;height:10px;">Disable</b></td>
+                                    }
+
+
+                                    <td>
+                                        <a class="btn btn-warning js-update" id="updateuser" asp-area="Admin" asp-controller="AppUser" asp-action="_UpdateUser" asp-route-id="@user.Id" style="margin-left:-50px;">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a class="btn btn-danger js-user-delete" asp-area="Admin" asp-controller="AppUser" asp-action="DeleteUser" asp-route-id="@user.Id">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                        <a class="btn btn-primary" id="Userdetail" asp-area="Admin" asp-controller="UserProfile" asp-action="Index" asp-route-id="@user.Id">
+                                            <i class="fa fa-list"></i>
+                                        </a>
+                                        <a class="btn btn-success js-userroledetail" asp-area="Admin" asp-controller="AppUserRole" asp-action="AssignRole" asp-route-id="@user.Id">
+                                            <i>EditRole</i>
+                                        </a>
+
+                                        @*@if (user.AccountStatus == true && user.AppRole.Name != "Admin")
+                                            {
+                                                <a class="btn btn-danger js-userroledetail" asp-route-id="@user.Id" asp-area="Admin" asp-controller="UsersAccountStatus" asp-action="UserAccountStatus">
+                                                    Disable
+                                                </a>
+
+                                            }
+                                            else if (user.AccountStatus == false && user.AppRole.Name != "Admin")
+                                            {
+                                                <a class="btn btn-primary js-userroledetail" asp-route-id="@user.Id" asp-area="Admin" asp-controller="UsersAccountStatus" asp-action="ManagerAccountStatus">
+                                                    Enable
+                                                </a>
+
+                                            }*@
+                                    </td>
+                                </tr>
+                            }
+
+
+
+                        </tbody>
+
+                    </table>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center" style="margin-top:15px;margin-left:-650px;">
+    @Html.Partial("Pages", Model)
+</div>
+
+
+<div class="modal" id="rolemoodal">
+
+</div>
+
+<div class="modal" id="AdduserModal">
+
+</div>
+
+<div class="modal" id="UpdateUserModal">
+
+</div>
+
+
+@section Scripts{
+    <script src="~/bootbox.min.js"></script>
+    <script>
+        $(function () {
+            //Create
+            $("#AddUserbtn").on("click", function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                console.log("Button 1 is working...");
+                $.ajax({
+
+                    url: btn.attr('href'),
+                    type: 'GET',
+                    success: function (response) {
+                        $("#AdduserModal").html(response);
+                        $("#AdduserModal").modal('show');
+                    }
+                });
+            });
+
+
+
+            //FormCreate
+            $(function () {
+                $(document.body).delegate(".FormCreate", "submit", async function (e) {
+
+                    e.preventDefault();
+                    console.log("But ton is working");
+                    var frm = $(this);
+
+                    return $.ajax({
+
+                        url: frm.attr('action'),
+                        type: frm.attr('method'),
+                        data: frm.serialize(),
+                        success: function (response) {
+                            if (response.status == true) {
+
+                                bootbox.alert(response.message);
+
+                                // refresh data grid
+                                setTimeout(function () {
+                                    $.ajax({
+
+                                        url: '/Admin/AppUser/AllUserList/',
+                                        type: 'GET',
+                                        success: function (data) {
+
+                                            $("#Alluserlist").html(data);
+                                        },
+                                        error: function () {
+
+                                        }
+                                    });
+                                }, 10);
+
+
+                                // hide modal
+                                $("#AdduserModal").modal('hide');
+                            } else {
+                                console.warn(response.message);
+                            }
+                        },
+                        error: function () {
+
+                        }
+                    });
+
+                });
+
+            });
+
+
+
+            //Get UserById
+            $("#Userdetail").on("click", function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                console.log("Button 1 is working...");
+                $.ajax({
+                    async: true,
+                    url: btn.attr('href'),
+                    type: 'GET',
+                    success: function (response) {
+                        //$("#rolemoodal").html(response);
+                        //$("#rolemoodal").modal('show');
+                    }
+                });
+            });
+
+
+
+            //Update
+            $(".js-update").on("click", function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                console.log("Button 1 is working...");
+                $.ajax({
+                    async: true,
+                    url: btn.attr('href'),
+                    type: 'GET',
+                    success: function (response) {
+                        $("#UpdateUserModal").html(response);
+                        $("#UpdateUserModal").modal('show');
+                    }
+                });
+            });
+
+
+
+
+            //FormUpdate
+            $(document.body).delegate(".FormUpdate", "submit", function (e) {
+                e.preventDefault();
+                console.log("Button is working");
+                var frm = $(this);
+
+                $.ajax({
+                    async: true,
+                    url: frm.attr('action'),
+                    type: frm.attr('method'),
+                    data: frm.serialize(),
+                    success: function (response) {
+                        if (response.status == true) {
+
+                            bootbox.alert(response.message);
+
+                            // refresh data grid
+                            $.ajax({
+                                async: true,
+                                url: '/Admin/AppUser/AllUserList/',
+                                type: 'GET',
+                                success: function (data) {
+                                    $("#Alluserlist").html(data);
+                                },
+                                error: function () {
+
+                                }
+                            });
+
+                            // hide modal
+                            $("#UpdateUserModal").modal('hide');
+                        } else {
+                            console.warn(response.message);
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+
+            });
+
+
+            //Assign Role
+            $(".js-userroledetail").on("click", function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                console.log("Button 1 is working...");
+                $.ajax({
+                    async: true,
+                    url: btn.attr('href'),
+                    type: 'GET',
+                    success: function (response) {
+                        $("#rolemoodal").html(response);
+                        $("#rolemoodal").modal('show');
+                    }
+                });
+            });
+
+            //delete
+            $(function () {
+                $(".js-user-delete").on("click", async function (e) {
+                    async = true;
+                    e.preventDefault();
+
+                    var btn = $(this);
+
+                    bootbox.confirm("Are you sure to delete the record?", function (result) {
+                        console.log("Btn working")
+                        if (result) {
+
+                            $.ajax({
+                                async: true,
+                                url: btn.attr('href'),
+                                type: 'Get',
+                                data: { id: btn.attr('data-id') },
+                                success: function (response) {
+                                    if (response.status) {
+                                        bootbox.alert(response.message);
+
+                                        // refresh data grid
+                                        return $.ajax({
+                                            asyn: true,
+                                            url: '/Admin/AppUser/AllUserList/',
+                                            type: 'GET',
+                                            success: function (data) {
+                                                $("#Alluserlist").html(data);
+                                            },
+                                            error: function () {
+
+                                            }
+                                        })
+                                    } else {
+                                        bootbox.alert(response.message);
+                                    }
+                                },
+                                error: function () {
+
+                                }
+                            });
+                        }
+                    });
+                });
+            });
+        });
+
+    </script>
+
+}

@@ -1,0 +1,64 @@
+﻿@model HotelCloudBedSystem.Areas.Admin.ViewModels.AppRoleCreateViewModel
+
+
+@{
+    ViewData["Title"] = "RoleCreate";
+    Layout = null;
+}
+
+
+    <div class="modal-dialog" id="RoleModal" style="width:500px;">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:#17a2b8">
+                <h5 class="modal-title" style="color:white">Add New App <small>Role</small></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form role="form" asp-area="Admin" asp-controller="AppRole" asp-action="RoleCreate"
+                      method="post" class="Rolecreate">
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger small text-uppercase" })
+
+                    <div class="box-body">
+                        <div class="form-group" style="margin-left:10px;">
+                            <label asp-for="Name" for="exampleInputEmail1"> Role Name</label>
+                            <input asp-for="Name" type="text" class="form-control" id="exampleInputEmail1" placeholder="Enter Title">
+                            <span asp-validation-for="Name"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-left:20px;">
+                        <label asp-for="Description" for="exampleInputEmail1">Role Description</label>
+                        <textarea asp-for="Description" type="text" id="Description" class="form-control" placeholder="Description" rows="5"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+
+                    <div class="form-group" style="margin-left:20px;">
+                        <label asp-for="Created">Adding Date</label>
+                        <input asp-for="Created" type="date" name="bday" min="1000-01-01"
+                               max="3000-12-31" class="form-control">
+                        <span asp-validation-for="Created"></span>
+                    </div>
+
+                    <!-- /.box-body -->
+
+                    <div class="box-footer" style="margin-left:10px;">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-danger">Reset</button>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+

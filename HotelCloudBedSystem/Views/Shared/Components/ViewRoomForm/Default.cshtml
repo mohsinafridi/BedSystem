@@ -1,0 +1,32 @@
+﻿@model HotelCloudBedSystem.ViewModels.RoomSearchViewModel
+
+@{
+
+}
+
+<style>
+    #Subbtn {
+        border: none;
+        background-color: #02598f;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin-left: 26px;
+        font-size: 16px;
+        border: 1px solid #6d7b84;
+    }
+</style>
+<form asp-area="" asp-controller="AvailableRoom" asp-action="Index" method="get">
+    @Html.HiddenFor(model => model.HotelId)
+    @Html.HiddenFor(model => model.hotelRoomTypeId)
+    @Html.HiddenFor(model => model.CheckInDate)
+    @Html.HiddenFor(model => model.CheckOutDate)
+
+
+    <button type="submit"
+            style="width:200px;height:47px;font-weight:500" id="Subbtn">
+        <img src="~/image/rr.png" style="width:27px;height:27px"
+             class="float-left" /> <b style="color:white;" id="stext"> Choose your Room</b>
+    </button>
+</form>
+

@@ -1,0 +1,330 @@
+﻿@model IEnumerable<HotelCloudBedSystem.Models.HotelRoom>
+@{
+    ViewData["Title"] = "HotelFloors";
+}
+
+<section class="content-header">
+    <h1>
+        Hotel Floors
+        <small>List</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Tables</a></li>
+        <li class="active">Data tables</li>
+    </ol>
+</section>
+
+<div class="box-body" id="hotelRooms">
+    <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+        <div class="row">
+            <div class="text-center" style="margin-top:30px;margin-left:-650px;">
+
+                @Html.Partial("Pages", Model)
+
+            </div>
+            @*<div style="margin-left:-180px;">
+                @await Component.InvokeAsync("HotelCloudBedSystem.Areas.Admin.ViewComponents.HotelSearchByName")
+            </div>*@
+            <div class="form-group" style="margin-left:900px">
+                <a class="btn btn-success float-right" asp-area="Manager" asp-controller="HotelRooms" asp-action="Create" id="Addhotelbtn">
+                    Add New Rooms
+                </a>
+            </div>
+            <div class="col-sm-12">
+                @if (Model == null)
+                {
+                    <div class="alert alert-warning">
+                        Empty Data Found..
+                    </div>
+                }
+                else
+                {
+                    <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info" style="margin-top:25px;margin-left:100px;">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width:20px;">Room Name</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 40px;">Room No</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 60px;">Room type</th>
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 60px;">Is Booked</th>
+                                @*<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 40px;margin-left:-100px;height:20px;">Floor Name</th>*@
+                                <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 150px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var room in Model)
+                            {
+                            <tr role="row" class="odd">
+                                <td class="sorting_1">
+                                    @room.RoomName
+                                </td>
+
+                                <td class="sorting_1">
+                                    @room.RoomNo
+                                </td>
+
+                                <td class="sorting_1">
+                                    @room.HotelRoomType.RoomType
+                                </td>
+
+                                <td>
+                                    @if (@room.IsBooked == true)
+                                    {
+                                        <p>Yes</p>
+                                    }
+                                    else
+                                    {
+                                        <p>No</p>
+                                    }
+
+                                </td>
+                                @*<td>
+            @room.HotelFloors.FloorName
+        </td>*@
+                            <td>
+
+                                <a class="btn btn-warning js-update" id="updateuser" asp-area="Manager" asp-controller="HotelRooms" asp-action="Update" style="margin-left:-50px" ; asp-route-id="@room.HotelRoomId">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                                <a class="btn btn-danger" asp-area="Manager" asp-controller="HotelRooms" asp-action="Delete" asp-route-id="@room.HotelRoomId">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                                <a class="btn btn-success" asp-area="Manager" asp-controller="HotelRoomProfile" asp-action="Index" asp-route-id="@room.HotelRoomId">
+                                    <i class="fa fa-picture-o"></i> Profile
+                                </a>
+
+
+                            </td>
+                            </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center" style="margin-top:15px;margin-left:-650px;">
+    @Html.Partial("Pages", Model)
+</div>
+
+<div class="modal" id="rolemoodal">
+
+</div>
+
+<div class="modal" id="AddroomModal">
+
+</div>
+
+<div class="modal" id="UpdateUserModal">
+
+</div>
+
+
+@section Scripts{
+    <script src="~/bootbox.min.js"></script>
+    <script>
+        $(function () {
+            //Create
+            $("#Addhotelbtn").on("click", function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                console.log("Button 1 is working...");
+                $.ajax({
+                    async: true,
+                    url: btn.attr('href'),
+                    type: 'GET',
+                    success: function (response) {
+                        $("#AddroomModal").html(response);
+                        $("#AddroomModal").modal('show');
+                    }
+                });
+            });
+
+            //get HotelProfile
+            $("#HotelList").on("click", function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                console.log("Button 1 is working...");
+                $.ajax({
+                    async: true,
+
+                    url: btn.attr('href'),
+                    type: 'GET',
+                    success: function (response) {
+                        //$("#rolemoodal").html(response);
+                        //$("#rolemoodal").modal('show');
+                    }
+                });
+            });
+
+
+            //FormCreate
+            $(document.body).delegate(".FormCreate", "submit", function (e) {
+                e.preventDefault();
+                console.log("Button is working");
+                var frm = $(this);
+
+                $.ajax({
+                    async: true,
+                    url: frm.attr('action'),
+                    type: frm.attr('method'),
+                    data: frm.serialize(),
+                    success: function (response) {
+                        if (response.status == true) {
+
+                            bootbox.alert(response.message);
+
+                            // refresh data grid
+                            $.ajax({
+                                async: true,
+                                url: '/Manager/HotelRooms/Index/',
+                                type: 'GET',
+                                success: function (data) {
+                                    $("#hotelRooms").html(data);
+                                },
+                                error: function () {
+
+                                }
+                            });
+
+                            // hide modal
+                            $("#AddFloorModal").modal('hide');
+                        } else {
+                            console.warn(response.message);
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+
+            });
+
+
+
+
+            //Update
+            $(".js-update").on("click", function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                console.log("Button 1 is working...");
+                $.ajax({
+                    async: true,
+                    url: btn.attr('href'),
+                    type: 'GET',
+                    success: function (response) {
+                        $("#UpdateUserModal").html(response);
+                        $("#UpdateUserModal").modal('show');
+                    }
+                });
+            });
+
+
+
+
+            //FormUpdate
+            $(document.body).delegate(".FormUpdate", "submit", function (e) {
+                e.preventDefault();
+                console.log("Button is working");
+                var frm = $(this);
+
+                $.ajax({
+                    url: frm.attr('action'),
+                    type: frm.attr('method'),
+                    data: frm.serialize(),
+                    success: function (response) {
+                        if (response.status == true) {
+
+                            bootbox.alert(response.message);
+
+                            // refresh data grid
+                            $.ajax({
+                                url: '/Admin/AppUser/AllUserList/',
+                                type: 'GET',
+                                success: function (data) {
+                                    $("#Alluserlist").html(data);
+                                },
+                                error: function () {
+
+                                }
+                            });
+
+                            // hide modal
+                            $("#UpdateUserModal").modal('hide');
+                        } else {
+                            console.warn(response.message);
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+
+            });
+
+
+            //Assign Role
+            $(".js-userroledetail").on("click", function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                console.log("Button 1 is working...");
+                $.ajax({
+                    url: btn.attr('href'),
+                    type: 'GET',
+                    success: function (response) {
+                        $("#rolemoodal").html(response);
+                        $("#rolemoodal").modal('show');
+                    }
+                });
+            });
+
+            //delete
+
+            $(".js-user-delete").on("click", function (e) {
+                e.preventDefault();
+
+                var btn = $(this);
+
+                bootbox.confirm("Are you sure to delete the record?", function (result) {
+                    console.log("Btn working")
+                    if (result) {
+                        $.ajax({
+                            url: btn.attr('href'),
+                            type: 'Get',
+                            data: { id: btn.attr('data-id') },
+                            success: function (response) {
+                                if (response.status) {
+                                    bootbox.alert(response.message);
+
+                                    // refresh data grid
+                                    $.ajax({
+                                        url: '/Admin/AppUser/AllUserList/',
+                                        type: 'GET',
+                                        success: function (data) {
+                                            $("#Alluserlist").html(data);
+                                        },
+                                        error: function () {
+
+                                        }
+                                    });
+                                } else {
+                                    bootbox.alert(response.message);
+                                }
+                            },
+                            error: function () {
+
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+}

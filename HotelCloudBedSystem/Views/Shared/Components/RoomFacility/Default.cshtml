@@ -1,0 +1,69 @@
+﻿@model HotelCloudBedSystem.ViewModels.RoomFacilityViewModel
+
+
+@{
+
+}
+
+<strong style="margin-left:20px;color:#02598f"> Facilities</strong>
+<div class="row">
+
+    @if (Model.Internet == true)
+    {
+        <img src="~/image/tick.jpg" style="width:25px;height:25px;margin-left:35px;margin-top:20px" />
+        <span style="margin-top:20px;color:dimgray;margin-left:3px;font-weight:500">Free Wifi</span>
+    }
+    else
+    {
+        <img src="~/image/cross.png" style=" width: 25px; height: 25px; margin-left: 35px; margin-top: 20px" />
+        <span style="margin-top:20px;color:dimgray;margin-left:3px;font-weight:500">Free Wifi</span>
+    }
+    @if (Model.Ac == true)
+    {
+        <img src="~/image/tick.jpg" style="width:25px;height:25px;margin-left:35px;margin-top:20px" />
+        <span style="        margin-top: 20px;
+        color: dimgray;
+        margin-left: 3px;font-weight:500">Ac</span>
+    }
+    else
+    {
+        <img src="~/image/cross.png" style="width:25px;height:25px;margin-left:35px;margin-top:20px" />
+        <span style="margin-top:20px;color:dimgray;margin-left:3px;font-weight:500">Ac</span>
+    }
+
+    @if (Model.Tv == true)
+    {
+        <img src="~/image/tick.jpg" style="width:25px;height:25px;margin-left:35px;margin-top:20px" />
+        <span style="        margin-top: 20px;
+        color: dimgray;
+        margin-left: 3px;font-weight:500">Tv</span>
+    }
+    else
+    {
+        <img src="~/image/cross.png" style="width:25px;height:25px;margin-left:35px;margin-top:20px" />
+        <span style="        margin-top: 20px;
+        color: dimgray;
+        margin-left: 3px;
+        font-weight: 500">Tv</span>
+    }
+    @if (Model.AttachedWashRoom == true)
+    {
+        <img src="~/image/tick.jpg" style="width:25px;height:25px;margin-left:95px;margin-top:20px" />
+        <span style="        margin-top: 20px;
+        color: dimgray;
+        margin-left: 3px;
+        font-weight: 500">Attached Washroom</span>
+    }
+    else
+    {
+        <img src="~/image/cross.png" style="width:25px;height:25px;margin-left:100px;margin-top:20px" />
+        <span style="        margin-top: 20px;
+        color: dimgray;
+        margin-left: 3px;
+        font-weight: 500">Attached Washroom</span>
+    }
+
+
+    
+
+</div>

@@ -1,0 +1,91 @@
+﻿@model HotelCloudBedSystem.ViewModels.RoomSearchViewModel
+
+@{
+
+}
+<style>
+
+
+    input[type=range] {
+        -webkit-appearance: none;
+    }
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 300px;
+            height: 5px;
+            background: #ddd;
+            border: none;
+            border-radius: 3px;
+        }
+
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            border: none;
+            height: 16px;
+            width: 16px;
+            border-radius: 50%;
+            background: goldenrod;
+            margin-top: -4px;
+        }
+
+        input[type=range]:focus {
+            outline: none;
+        }
+
+            input[type=range]:focus::-webkit-slider-runnable-track {
+                background: #ccc;
+            }
+    .scbtn {
+        /* Green */
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border: 1px solid #6d7b84;
+    }
+</style>
+
+<form asp-area="" asp-controller="AvailableRoom" asp-action="Index" method="get">
+    @Html.HiddenFor(Model => Model.hotelRoomTypeId)
+    @Html.HiddenFor(Model => Model.HotelId)
+    @Html.HiddenFor(Model => Model.CheckInDate)
+    @Html.HiddenFor(Model => Model.CheckOutDate)
+    <div class="row" style="margin-left:100px;">
+        <p style="color:grey;font-weight: bold;margin-top:94px">Filter By</p>
+        <div class="card" style="width:400px;margin-top:60px;height:90px;margin-left:40px;background-color:#EDE9E4">
+            <div class="card-body" id="pricevalue">
+                <span id="PriceValue" class="float-right lead" style="color:#02598f;font-weight: bold;margin-top:-18px">PKR 0</span>
+                <input id="Price" asp-for="@Model.Price" type="range" min="0" max="2500" value="0" step="50" class="form-control" style="height:46px;margin-top:-4px" />
+            </div>
+        </div>
+        <div class="card" style="width: 340px;margin-top: 60px;height: 90px;margin-left: 40px;background-color: #EDE9E4">
+            <div class="card-body" id="pricevalue">
+                <p style="font-weight:bold;margin-top:-20px;color:gray">
+                    Star @for (int i = 0; i < 5; i++)
+                    {<i class="fa fa-star" style="color:sandybrown"></i>}
+                </p>
+
+                <select id="cars" asp-for="@Model.StarRatingId"
+                        style="width:300px;height:46px;margin-top:-36px" asp-items="@Model.Ratings">
+                    <option value="volvo">Choose Room By Ratings</option>
+
+                </select>
+
+
+            </div>
+        </div>
+        <div class="card" style="width:230px;margin-top:60px;height:90px;margin-left:40px;background-color:#EDE9E4">
+            <div class="card-body" id="pricevalue">
+                <button type="submit" id="sbtn" class="col scbtn" style="width:190px;height:47px;background-color:#02598f">
+                    <img src="~/image/multimedia.png" style="width:25px;height:25px;" class="float-left" /> <b style="color:white;" id="stext"> Filter Rooms</b>
+                </button>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+

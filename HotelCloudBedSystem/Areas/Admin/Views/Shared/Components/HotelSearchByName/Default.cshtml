@@ -1,0 +1,19 @@
+﻿
+@model HotelCloudBedSystem.Areas.Admin.ViewModels.HotelSearchedByNameViewModel
+@{
+    Layout = null;
+}
+
+
+
+
+<div class="m-1 p-2" style="margin-top:-33px;margin-left:700px;">
+    <form asp-area="Admin" asp-controller="Hotel" asp-action="Index" method="get" class="form-inline">
+        <label class="m-1">Search By:</label>
+        <label asp-for="@Model.Hotelid" class="col-form-label">Role</label>
+        <select asp-for="@Model.Hotelid" class="form-control" asp-items="@Model.Hotel">
+            <option>Select From List</option>
+        </select>
+        <button class="btn btn-success m-1">Search</button>
+    </form>
+</div>

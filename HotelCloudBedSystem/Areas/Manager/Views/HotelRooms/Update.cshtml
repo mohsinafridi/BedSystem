@@ -1,0 +1,141 @@
+﻿
+@model HotelCloudBedSystem.Areas.Manager.ViewModels.RoomCreateViewModel
+@{
+    Layout = null;
+}
+
+
+<div class="modal-dialog" id="HotelAddModel" style="width:500px;">
+    <div class="modal-content">
+        <div class="modal-header" style="background-color:#17a2b8">
+            <h5 class="modal-title" style="color:white">Update <small>Rooms</small></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" id="UserAddForm">
+            <form asp-area="Manager" asp-controller="HotelRooms" asp-action="Update"
+                  method="post" class="FormCreate">
+                @Html.HiddenFor(model => model.RoomId)
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger small text-uppercase" })
+                @*<div class="form-group">
+            <label asp-for="RoomType"></label>
+            <input asp-for="RoomType" class="form-control" />
+            <span asp-validation-for="RoomType" class="text-danger"></span>
+        </div>*@
+
+                <div class="form-group">
+                    <label asp-for="RoomName"></label>
+                    <input asp-for="RoomName" class="form-control" />
+                    <span asp-validation-for="RoomName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RoomNo"></label>
+                    <input asp-for="RoomNo" class="form-control" />
+                    <span asp-validation-for="RoomNo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="RoomType"></label>
+                    <input asp-for="RoomType" class="form-control" />
+                    <span asp-validation-for="RoomType" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="margin-left:-10px;">
+                    <label asp-for="Description"></label>
+                    <textarea rows="10" cols="66" asp-for="Description"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                @*<div class="form-group">
+            <label asp-for="HotelName"></label>
+            <input asp-for="HotelName" disabled class="form-control" />
+            <span asp-validation-for="HotelName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="FloorName"></label>
+            <input asp-for="FloorName" disabled class="form-control" />
+            <span asp-validation-for="FloorName" class="text-danger"></span>
+        </div>*@
+
+
+
+                @*<div class="form-group">
+            <label asp-for="HotelId" class="col-form-label">Hotels</label>
+            <select asp-for="HotelId" class="form-control" asp-items="Model.Hotels">
+                <option>Select From List</option>
+            </select>
+            <span asp-validation-for="HotelId" class="text-danger small text-uppercase"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="FloorId" class="col-form-label">Floors</label>
+            <select asp-for="FloorId" class="form-control" asp-items="Model.Floors">
+                <option>Select From List</option>
+            </select>
+            <span asp-validation-for="FloorId" class="text-danger small text-uppercase"></span>
+        </div>*@
+
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-danger">Reset</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="UseraddingModal">
+
+</div>
+
+
+@section Scripts{
+    <script src="~/bootbox.min.js"></script>
+    <script>
+
+        ////$(".FormCreate").on("submit", function (e) {
+        ////$("#RoleModal").delegate(".FormCreate", "submit", function (e) {
+        //    e.preventDefault();
+        //    console.log("Button is working");
+        //    var frm = $(this);
+
+        //    $.ajax({
+        //        url: frm.attr('action'),
+        //        type: frm.attr('method'),
+        //        data: frm.serialize(),
+        //        success: function (response) {
+        //            if (response.status == true) {
+
+        //                bootbox.alert(response.message);
+
+        //                // refresh data grid
+        //                $.ajax({
+        //                    url: '/Admin/UserList/NotinRole/',
+        //                    type: 'GET',
+        //                    success: function (data) {
+        //                        $("#NotinRoleUser").html(data);
+        //                    },
+        //                    error: function () {
+
+        //                    }
+        //                });
+
+        //                // hide modal
+        //                $("#CreateModal").modal('hide');
+        //            } else {
+        //                console.warn(response.message);
+        //            }
+        //        },
+        //        error: function () {
+
+        //        }
+        //    });
+
+        //});
+    </script>
+
+}

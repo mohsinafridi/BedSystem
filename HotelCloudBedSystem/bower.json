@@ -1,0 +1,18 @@
+{
+  "name": "EVS 347",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "v4.1.3",
+    "jquery": "^3.3.1",
+    "bootswatch": "^4.1.3",
+    "bootbox.js": "^4.4.0",
+    "bootstrap-datepicker": "v1.8.0",
+    "font-awesome": "Font-Awesome#v4.7.0",
+    "font-awsome": "5.5.0",
+    "simplePagination.js": "*"
+  },
+  "resolutions": {
+    "bootstrap": "v4.1.3"
+  }
+ 
+}

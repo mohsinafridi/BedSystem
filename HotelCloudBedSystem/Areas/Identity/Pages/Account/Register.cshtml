@@ -1,0 +1,215 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<style>
+    #boxshadow {
+        position: relative;
+        box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+        padding: 10px;
+        background: white;
+    }
+
+        #boxshadow::after {
+            content: '';
+            position: absolute;
+            z-index: -1; /* hide shadow behind image */
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+            width: 70%;
+            left: 15%; /* one half of the remaining 30% */
+            height: 100px;
+            bottom: 0;
+        }
+
+    .scbtn {
+        /* Green */
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-left: 100px;
+        margin-top: 25px;
+        border: 1px solid #6d7b84;
+    }
+
+    .accountbtn {
+        /* Green */
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-left: 100px;
+        border: 1px solid #6d7b84;
+    }
+
+    #Subbtn {
+        background-color: #02598f;
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border: 1px solid #6d7b84;
+    }
+</style>
+
+<div class="card shadow-sm bg-light mb-3" style="background-color:white">
+
+    <div class="card-header " style="background-color:#02598f">
+        <h5 style="color:#D4AC0D">
+            <i class="fa fa-sign-in" aria-hidden="true"></i>
+            <span style="color:white">SignUp Form</span>
+        </h5>
+    </div>
+    <div class="card-body" style="background-color:white">
+        <div class="row">
+
+            <div class="col-md-5">
+                <section>
+                    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <hr />
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Input.FirstName"></label>
+                            <input asp-for="Input.FirstName" class="form-control" placeholder="first Name..." />
+                            <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.LastName"></label>
+                            <input asp-for="Input.LastName" class="form-control" placeholder="last Name..." />
+                            <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Email"></label>
+                            <input asp-for="Input.Email" class="form-control" placeholder="email@gmail.com" />
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Password"></label>
+                            <input asp-for="Input.Password" class="form-control" placeholder="enter password" />
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.ConfirmPassword"></label>
+                            <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="confirm password" />
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                        </div>
+                        <button type="submit"
+                                style="width:150px;height:47px;font-weight:500" id="Subbtn">
+                            <i class="fa fa-user-plus"></i> Register
+                        </button>
+                    </form>
+
+
+                    <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">
+                        <i class="fa fa-sign-in" style="margin-top:20px"></i>
+                        login If Already  Account Created!
+                    </a>
+
+                </section>
+            </div>
+            <div class="col-md-5">
+                <section>
+                    <h4>Use another service to log in.</h4>
+                    <hr />
+                    @{
+                        if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                        {
+                            <div>
+                                <p>
+                                    There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                    for details on setting up this ASP.NET application to support logging in via external services.
+                                </p>
+                            </div>
+                        }
+                        else
+                        {
+                            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                <div class="col">
+                                    <p>
+                                        @foreach (var provider in Model.ExternalLogins)
+                                        {
+
+                                            if (provider.Name == "Facebook")
+                                            {
+                                                <button type="submit" id="sbtn" class="col scbtn" style="width:300px;height:47px;background-color:white" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                                    <img src="~/image/facebook.png" style="width:25px;height:25px;background-color:white" class="float-left" /> <b style="color:#02598f;" id="stext"> Continue With @provider.DisplayName</b>
+                                                </button>
+                                            }
+                                            else if (provider.Name == "Google")
+                                            {
+                                                <button type="submit" class="col scbtn" id="sbtn1" name="provider" value="@provider.Name" style="width:300px;height:47px;background-color:white" title="Log in using your @provider.DisplayName account">
+                                                    <img src="~/image/search.png" style="width:25px;height:25px;" class="float-left" /> <b style="color:#02598f;" id="stext1"> Continue With @provider.DisplayName</b>
+                                                </button>
+                                            }
+                                            else if (provider.Name == "Microsoft")
+                                            {
+                                                <button type="submit" class="col scbtn" id="sbtn2" name="provider" value="@provider.Name" style="width:300px;height:47px;background-color:white" title="Log in using your @provider.DisplayName account">
+                                                    <img src="~/image/sssss.png" style="width:25px;height:25px;" class="float-left" /> <b style="color:#02598f;" id="stext2"> Continue With @provider.DisplayName</b>
+                                                </button>
+                                            }
+
+                                        }
+                                    </p>
+                                </div>
+                            </form>
+                        }
+                    }
+
+                    <h5 style="color:dimgray;margin-left:20px;font-weight:700;margin-top:40px">Register As Manager</h5>
+                    <p style="margin-left:20px;font-weight:500">Register your hotel in HotelNetwork..Explore your buiness around the country</p>
+
+                    <a class="col accountbtn" style="width:300px;height:47px;background-color:white;margin-left:115px" id="bnsaccount"
+                       asp-area="" asp-controller="ManagerRegisteration" asp-action="Register">
+                        <img src="~/image/pnn.png" style="width:27px;height:27px;margin-top:8px" 
+                             class="float-left" /> <b style="color:#02598f;position:absolute;left:60px;top:10px" 
+                                                      id="stext3"> Register As Buisness Account</b>
+                    </a>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            $("#sbtn").hover(function () {
+                $(this).css("background-color", "#02598f");
+                $("#stext").css("color", "white");
+            }, function () {
+                $(this).css("background-color", "white");
+                    $("#stext").css("color", "#02598f");
+            });
+            $("#sbtn1").hover(function () {
+                $(this).css("background-color", "#02598f");
+                $("#stext1").css("color", "white");
+            }, function () {
+                $(this).css("background-color", "white");
+                    $("#stext1").css("color", "#02598f");
+            });
+            $("#sbtn2").hover(function () {
+                $(this).css("background-color", "#02598f");
+                $("#stext2").css("color", "white");
+            }, function () {
+                $(this).css("background-color", "white");
+                    $("#stext2").css("color", "#02598f");
+            });
+            $("#bnsaccount").hover(function () {
+                $(this).css("background-color", "#02598f");
+                $("#stext3").css("color", "white");
+            }, function () {
+                $(this).css("background-color", "white");
+                $("#stext3").css("color", "dimgrey");
+            });
+        });
+    </script>
+}

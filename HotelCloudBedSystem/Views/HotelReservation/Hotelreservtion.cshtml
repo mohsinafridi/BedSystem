@@ -1,0 +1,251 @@
+﻿@model HotelCloudBedSystem.ViewModels.RoomReservationViewModel
+@{
+    ViewData["Title"] = "Hotelreservtion";
+}
+
+
+<style>
+    #boldd {
+        color: #02598f;
+    }
+</style>
+<span style="color:dimgray;top:130px;
+margin-left:100px;position:absolute;font-size:18px;font-weight:500">
+    It takes just <b id="boldd">2 minutes</b>
+    to secure this great deal! <b id="boldd">No account needed.</b>
+</span>
+<div class="col">
+
+    <div class="row">
+        <div class="col-5">
+            <img src="~/image/hotel2.jpg"
+                 style="width:400px;height:200px;margin-left:100px;margin-top:80px" />
+        </div>
+        <div class="col-5" style="margin-top:100px;margin-left:-30px">
+            <span style="font-weight:600;font-size:22px">@Model.HotelName Hotel</span>
+            <br />
+
+            <span style="color:coral;font-weight:500; font-size:16px;">@Model.HotelStar Stars Hotel</span>
+            <br />
+            <br />
+            <span style="color:#02598f;font-weight:500; font-size:16px;">@Model.HotelAddress</span>
+
+        </div>
+    </div>
+
+    <div class="row" style="margin-left:90px;margin-top:60px">
+        <div class="col-5">
+            <section>
+                <div class="card text-white  mb-3" style="max-width: 25rem;">
+                    <div class="card-header"
+                         style="background-color:#EDE9E4;color:#02598f">
+                        <span style="font-weight:500;font-size:20px">
+                            Price Card
+                        </span>
+                    </div>
+                    <div class="card-body" style="background-color:#EDE9E4">
+                        <div class="col">
+                            <div class="row">
+                                <div class="col-8">
+                                    <span style="font-weight:600;font-size:20px;margin-top:10px;
+                                    color:dimgrey">@Model.Roomname Room</span>
+                                </div>
+                                <div class="col-3" style="margin-top: -13px
+">
+                                    <div class="container"
+                                         style="width:100px;height:60px;background-color:coral;margin-right:15px">
+                                        <span style="        color: white;
+        font-weight: 500
+">
+                                            <span style="font-size:18px">Rs @Model.Price</span> per night
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <span style="color:coral;font-weight:500">
+                                @Model.HotelCity City
+                            </span>
+                            <br />
+
+                            <span style="color:#02598f;font-weight:500; font-size:16px;">
+                               @Model.HotelAddress
+                            </span>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-6">
+                                <span style="color:grey;margin-left:11px">
+                                    Room Cost
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:black;margin-left:70px;font-weight:500">
+                                    Rs @Model.Price.00
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-6">
+                                <span style="color:grey;margin-left:11px">
+                                    1 Room x 1 Night
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:coral;margin-left:70px;font-weight:500">
+                                    Rs @Model.Price.00
+                                </span>
+                            </div>
+                        </div>
+                        <hr />
+
+                        <span style="font-weight:500;
+                           font-size:19px;color:#02598f;margin-left:10px">Free From Taxes</span>
+
+                        <hr />
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-6">
+                                <span style="color:grey;margin-left:11px">
+                                    Resort Fee
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:coral;margin-left:70px;font-weight:500">
+                                    Rs 00.00
+                                </span>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row"
+                             style="margin-top:20px;">
+
+                            <div class="col-6">
+                                <span style="color:coral;margin-left:11px;
+                                 font-weight:600;font-size:21px;margin-top:30px">
+                                    Total Charges
+                                </span>
+                            </div>
+                            <div class="col-6">
+                                <span style="color:coral;margin-left:70px;font-weight:500">
+                                    Rs @Model.Price.00
+                                </span>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="col-7">
+            <section>
+                <div class="card text-white  mb-3" style="max-width: 43rem;">
+                    <div class="card-header"
+                         style="background-color:#EDE9E4;
+                          color:#02598f;font-weight:500;font-size:20px">Reservation Form</div>
+                    <div class="card-body" style="background-color:#EDE9E4">
+                        <form asp-area=""
+                              asp-controller="HotelReservation" asp-action="Hotelreservtion" method="post">
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger small text-uppercase" })
+                            @Html.HiddenFor(model => model.RoomId)
+                            @Html.HiddenFor(model => model.HotelName)
+                            @Html.HiddenFor(model => model.HotelAddress)
+                            @Html.HiddenFor(model => model.Price)
+                            @Html.HiddenFor(model => model.HotelStar)
+                            @Html.HiddenFor(model => model.HotelCity)
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label style="color:grey">UserFull Name</label>
+                                    <input asp-for="@Model.UserName" class="form-control" id="email" placeholder="enter fullname">
+                                    <span asp-validation-for="@Model.UserName"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label style="color:grey">Cnic</label>
+                                    <input asp-for="@Model.Cnic" class="form-control" id="pno" placeholder="enter Cnic no">
+                                    <span asp-validation-for="@Model.Cnic"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label style="color:grey">Email</label>
+                                    <input asp-for="@Model.Email" class="form-control" type="email" id="email" placeholder="email">
+                                    <span asp-validation-for="@Model.Email"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label style="color:grey">Phone No</label>
+                                    <input asp-for="@Model.PhoneNo" class="form-control" id="pno" placeholder="+92235.....">
+                                    <span asp-validation-for="@Model.PhoneNo"></span>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label style="color:grey">Address</label>
+                                <input asp-for="@Model.Address" class="form-control" id="inputAddress"
+                                       placeholder="enter your address" style="width:647px;">
+                                <span asp-validation-for="@Model.Address"></span>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label style="color:grey">City</label>
+                                    <input asp-for="@Model.UserCity" class="form-control" id="email" placeholder="enter your city">
+                                    <span asp-validation-for="@Model.UserCity"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label style="color:grey">zip code</label>
+                                    <input asp-for="@Model.ZipCode" class="form-control" id="pno" placeholder="enter city zip code">
+                                    <span asp-validation-for="@Model.ZipCode"></span>
+                                </div>
+                            </div>
+
+                            <div class="form-row" style="margin-top:5px;">
+                                <div class="form-group col-md-6">
+                                    <label style="color:grey">CheckIn Date</label>
+                                    <input asp-for="@Model.ChkIndate" class="form-control" type="text" id="start-date" placeholder="select checkin date">
+                                    <span asp-validation-for="@Model.ChkIndate"></span>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label style="color:grey">CheckOut Date</label>
+                                    <input asp-for="@Model.ChkOutdate" class="form-control" type="text" id="end-date" placeholder="select checkout date">
+                                    <span asp-validation-for="@Model.ChkOutdate"></span>
+                                </div>
+                            </div>
+
+
+                            <button type="submit"
+                                    style="width:647px;color:white;
+                                height:47px;font-weight:500;background-color:#02598f" id="Subbtn">
+
+                                <img src="~/image/laptop.png" style="width:35px;height:35px" />  Confirm Reservation
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(function () {
+                var dateToday = new Date();
+                var dates = $("#start-date, #end-date").datepicker({
+                    defaultDate: "+2d",
+                    changeMonth: true,
+                    numberOfMonths: 1,
+                    minDate: dateToday,
+                    onSelect: function (selectedDate) {
+                        var option = this.id == "start-date" ? "minDate" : "maxDate",
+                            instance = $(this).data("datepicker"),
+                            date = $.datepicker.parseDate(instance.settings.dateFormat || $.datepicker._defaults.dateFormat, selectedDate, instance.settings);
+                        dates.not(this).datepicker("option", option, date);
+                    }
+                });
+            });
+        });
+    </script>
+}

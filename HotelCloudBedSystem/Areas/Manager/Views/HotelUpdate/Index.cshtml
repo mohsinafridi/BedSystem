@@ -1,0 +1,98 @@
+﻿
+@model HotelCloudBedSystem.Areas.Manager.ViewModels.HotelListViewModel
+@{
+    Layout = null;
+}
+
+
+<div class="modal-dialog" id="HotelAddModel" style="width:500px;">
+    <div class="modal-content">
+        <div class="modal-header" style="background-color:#17a2b8">
+            <h5 class="modal-title" style="color:white">Hotel Update <small>Form</small></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body" id="UserAddForm">
+            <form asp-area="Manager" asp-controller="HotelUpdate" asp-action="Index"
+                  method="post" class="FormCreate">
+                @Html.HiddenFor(model => model.HotelId)
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger small text-uppercase" })
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="HotelName"></label>
+                            <input asp-for="HotelName" class="form-control" />
+                            <span asp-validation-for="HotelName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="HotelCity"></label>
+                            <input asp-for="HotelCity" class="form-control" />
+                            <span asp-validation-for="HotelCity" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="NoOfFloors"></label>
+                            <input asp-for="NoOfFloors" class="form-control" />
+                            <span asp-validation-for="NoOfFloors" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="NoOfRooms"></label>
+                            <input asp-for="NoOfRooms" class="form-control" />
+                            <span asp-validation-for="NoOfRooms" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group" style="margin-left:-10px;">
+                    <label asp-for="Address"></label>
+                    <textarea rows="5" cols="66" asp-for="Address"></textarea>
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+
+                <div class="form-group" style="margin-left:-10px;">
+                    <label asp-for="Description"></label>
+                    <textarea rows="10" cols="66" asp-for="Description"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <h4>
+                    <strong style="margin-left:50px;
+                    margin-top:10px">Facilities</strong>
+                </h4>
+                <div class="row" style="margin-left:10px;margin-top:20px">
+
+
+                    <input type="checkbox" asp-for="FreeWifi" style="margin-left:35px"> <span> <i class="fa fa-wifi"></i>Free Wifi</span>
+                    <input type="checkbox" asp-for="BreckFast" style="margin-left:35px"> <span> <i class="fa fa-coffee"></i>BreckFast</span>
+                    <input type="checkbox" asp-for="Lunch" style="margin-left:35px"> <span> <i class="fa fa-apple"></i>Lunch</span>
+                    <input type="checkbox" asp-for="Dinner" style="margin-left:35px"> <span> <i class="fa fa-apple"></i>Dinner</span>
+                    <input type="checkbox" asp-for="AttachedWashrooms" style="margin-left:35px;margin-top:20px"> <span> <i class="fa fa-bath"></i>Attach Washroom</span>
+                    <input type="checkbox" asp-for="Receptionservices" style="margin-left:35px"> <span> <i class="fa fa-server"></i>Reception Service</span>
+                    <input type="checkbox" asp-for="CarParking" style="margin-left:115px"> <span> <i class="fa fa-car"></i>CarParking</span>
+                    <input type="checkbox" asp-for="Laundry" style="margin-left:35px;margin-top:20px"> <span> <i class="fa fa-female"></i>Laundry</span>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-danger">Reset</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>

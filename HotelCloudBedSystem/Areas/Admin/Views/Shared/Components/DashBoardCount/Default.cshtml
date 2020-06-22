@@ -1,0 +1,184 @@
+﻿@model HotelCloudBedSystem.Areas.Admin.ViewModels.DashBoardCountViewModel
+
+@{
+
+    Layout = null;
+}
+
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a  asp-area="Admin" asp-controller="AppUser" asp-action="AllUserList">
+        <div class="info-box">
+            <span class="info-box-icon bg-aqua"><i class="ion ion-android-people"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">TotalAppUser</span>
+                <span class="info-box-number">@Model.TotalUserCount</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </a>
+   
+    <!-- /.info-box -->
+</div>
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a asp-area="Admin" asp-controller="AppRole"  asp-action="Index">
+        <div class="info-box">
+            <span class="info-box-icon bg-yellow"><i class="ion ion-person-add"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Roles</span>
+                <span class="info-box-number">@Model.RoleCount</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </a>
+   
+    <!-- /.info-box -->
+</div>
+<!-- /.col -->
+<!-- fix for small devices only -->
+<div class="clearfix visible-sm-block"></div>
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a asp-area="" asp-controller=""  asp-action="">
+        <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="ion ion-person-add"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Admins</span>
+                <span class="info-box-number">@Model.AdminCount</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </a>
+   
+    <!-- /.info-box -->
+</div>
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a asp-area="Admin" asp-controller="UserList"  asp-action="ApplicationUser">
+        <div class="info-box">
+            <span class="info-box-icon bg-aqua-gradient"><i class="ion ion-person-add"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">AppEndUser</span>
+                <span class="info-box-number">@Model.EndUserCount</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </a>
+   
+    <!-- /.info-box -->
+</div>
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a asp-area="" asp-controller=""  asp-action="">
+        <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="ion ion-person-add"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Enable Users</span>
+                <span class="info-box-number">@Model.EnabledUserCount</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </a>
+  
+    <!-- /.info-box -->
+</div>
+
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a asp-area="" asp-controller=""  asp-action="">
+        <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="ion ion-person-add"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Disable User</span>
+                <span class="info-box-number">@Model.DisabledUserCount</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </a>
+   
+    <!-- /.info-box -->
+</div>
+
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a asp-area="Admin" asp-controller="UserList"  asp-action="NotInRole">
+        <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="ion ion-person-add"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Not In Roles</span>
+                <span class="info-box-number">@Model.NotInRole</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </a>
+   
+    <!-- /.info-box -->
+</div>
+
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a asp-area="Admin" asp-controller="UserList"  asp-action="Manager">
+        <div class="info-box">
+            <span class="info-box-icon bg-primary"><i class="ion ion-person-add"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Manager</span>
+                <span class="info-box-number">@Model.ManagerCount</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </a>
+   
+    <!-- /.info-box -->
+</div>
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a  asp-area="" asp-controller=""  asp-action="">
+        <div class="info-box">
+            <span class="info-box-icon bg-blue"><i class="ion ion-person-stalker"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">InRole</span>
+                <span class="info-box-number">@Model.InRole</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </a>
+  
+    <!-- /.info-box -->
+</div>
+
+
+<div class="col-md-3 col-sm-6 col-xs-12">
+    <a asp-area="Admin" asp-controller="Hotel"  asp-action="Index">
+        <div class="info-box">
+            <span class="info-box-icon bg-blue"><i class="fa fa-hotel"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Total Hotels</span>
+                <span class="info-box-number">@Model.HotelCount</span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+    </a>
+  
+    <!-- /.info-box -->
+</div>
+
+
+
+
+
+
+
+
+
+<!-- /.col -->

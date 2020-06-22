@@ -1,0 +1,56 @@
+﻿@model HotelCloudBedSystem.Areas.Admin.ViewModels.DashBoardCountViewModel
+@{
+    Layout = null;
+}
+
+
+<p class="text-center">
+    <strong>Goal Completion</strong>
+</p>
+
+<div class="progress-group" style="width:500px;">
+    <span class="progress-text">All User</span>
+    <span class="progress-number"><b>@Model.TotalUserCount</b></span>
+
+    <div class="progress sm">
+        <div class="progress-bar progress-bar-aqua" style="width:@Model.TotalUserCount%"></div>
+    </div>
+</div>
+<!-- /.progress-group -->
+<div class="progress-group" style="width:500px;">
+    <span class="progress-text">Enabled</span>
+    <span class="progress-number"><b>@Model.EnabledUserCount / @Model.TotalUserCount</b> </span>
+
+    <div class="progress sm">
+        <div class="progress-bar progress-bar-green" style="width:@Model.EnabledUserPer%"></div>
+    </div>
+</div>
+<!-- /.progress-group -->
+<div class="progress-group" style="width:500px;">
+    <span class="progress-text">Disabled</span>
+    <span class="progress-number"><b>@Model.DisabledUserCount / @Model.TotalUserCount</b></span>
+
+    <div class="progress sm">
+        <div class="progress-bar progress-bar-red" style="width:@Model.DisableUserPer%"></div>
+    </div>
+</div>
+
+<div class="progress-group" style="width:500px;">
+    <span class="progress-text">In Role</span>
+    <span class="progress-number"><b>@Model.InRole / @Model.TotalUserCount</b></span>
+
+    <div class="progress sm">
+        <div class="progress-bar progress-bar-yellow" style="width:@Model.InRolePer%"></div>
+    </div>
+</div>
+
+
+<div class="progress-group" style="width:500px;">
+    <span class="progress-text">NotIn Role</span>
+    <span class="progress-number"><b>@Model.NotInRole / @Model.TotalUserCount</b></span>
+
+    <div class="progress sm">
+        <div class="progress-bar progress-bar-primary" style="width:@Model.NotInROlePer%"></div>
+    </div>
+</div>
+<!-- /.progress-group -->

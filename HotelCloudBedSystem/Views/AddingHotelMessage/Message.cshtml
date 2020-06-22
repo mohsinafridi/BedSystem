@@ -1,0 +1,69 @@
+﻿@model HotelCloudBedSystem.ViewModels.HotelAndManagerViewModel
+@{
+    ViewData["Title"] = "Message";
+}
+
+    <div class="card" style="width:800px;margin-left:180px;margin-top:40px;">
+        <h5 class="card-header bg-info" style="color:white">
+            <i class="fa fa-suitcase" aria-hidden="true"></i> Buiness Account</h5>
+        <div class="card-body">
+            <h5 class="card-title">please vrify your account .....</h5>
+            <p class="card-text">
+                Yuor request for Adding  Hotel sent Successfuly...
+                it will take few days to accept your request you will recive the acceptance
+                message on mobile and email
+            </p>
+
+            <input asp-for="@Model.Email" class="form-control" />
+            <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Send verification email</button>
+            <h3 class="alert alert-info" style="margin-top:30px;"> 
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i> Manager Info</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <section>
+                        <h5><b>Manager</b></h5>
+                        <h5><b>Phone</b></h5>
+                        <h5><b>Email</b></h5>
+                        <h5><b>Address</b></h5>
+                    </section>
+                </div>
+                <div class="col-md-6">
+                    <section>
+                        <h5>@Model.ManagerName</h5>
+                        <h5>@Model.PhoneNo</h5>
+                        <h5>@Model.Email</h5>
+                        <h5>@Model.Address</h5>
+                    </section>
+                </div>
+            </div>
+
+            <h3 class="alert alert-info" style="margin-top:30px;">
+            <i class="fa fa-hotel"></i> Hotel Info</h3>
+            <div class="row">
+                <div class="col-md-6">
+                    <section>
+                        <h5><b>Hotel</b></h5>
+                        <h5><b>Rooms</b></h5>
+                        <h5><b>Floors</b></h5>
+                        <h5><b>City</b></h5>
+
+                    </section>
+                </div>
+                <div class="col-md-6">
+                    <section>
+                        <h5>@Model.HotelName</h5>
+                        <h5>@Model.Rooms</h5>
+                        <h5>@Model.Floors</h5>
+                        <h5>@Model.City</h5>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+           
+    
+
+    
+

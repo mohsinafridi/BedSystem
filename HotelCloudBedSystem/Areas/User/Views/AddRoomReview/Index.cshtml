@@ -1,0 +1,45 @@
+﻿@model HotelCloudBedSystem.Areas.User.ViewModels.AddReviewViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div>
+    <h2 style="margin-top: 0px;margin-left: 50px;">
+        <i class="fa fa-plus" aria-hidden="true" style="color:#922B21"></i>
+        <b style="margin-left: 3px;color:#D4AC0D"> Add Room Review</b>
+    </h2>
+    <hr style="margin-top: 0rem;">
+</div>
+
+<form asp-area="User" asp-controller="AddRoomReview"
+      asp-action="Index" method="post">
+
+    @Html.HiddenFor(Model => Model.RoomId)
+    <div class="form-group">
+        <label for="exampleFormControlInput1">UserName</label>
+        <input type="text" class="form-control" id="exampleFormControlInput1" asp-for="@Model.UserName"
+               placeholder="username">
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">Review</label>
+        <textarea asp-for="@Model.Review" class="form-control"
+                  id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="exampleFormControlSelect1">Review Star</label>
+        <br />
+        <select id="cars" asp-for="@Model.ReviewId"
+                style="width:990px;height:46px;margin-top:0px" asp-items="@Model.Ratings">
+            <option value="volvo">Choose Room By Ratings</option>
+
+        </select>
+    </div>
+
+    <button class="btn btn-primary" type="submit">
+        <i class="fa fa-plus-circle"></i> Add Review
+    </button>
+</form>
+

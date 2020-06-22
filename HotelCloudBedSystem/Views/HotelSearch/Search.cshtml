@@ -1,0 +1,188 @@
+﻿@model IEnumerable<HotelCloudBedSystem.ViewModels.HotelListViewModel>
+@{
+    ViewData["Title"] = "Search";
+}
+
+
+
+@{
+    string city = null;
+    List<string> hotels = new List<string>();
+    int roomTypeid = 0;
+    DateTime ChkInDate=new DateTime();
+    DateTime ChkOutTime = new DateTime() ;
+}
+@if (Model.Count() > 0)
+{
+
+
+    @foreach (var hotel in Model)
+    {
+        city = hotel.HotelCity;
+        roomTypeid = hotel.HotelRoomTypeId;
+        ChkInDate = hotel.CheckIn;
+        ChkOutTime = hotel.CheckOut;
+        hotels.Add(hotel.HotelName);
+
+    }
+}
+
+@{
+    var value = 0;
+}
+
+@*@await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.MainLogo")*@
+@await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.HotelFiltering",
+    new { city = city, id = roomTypeid , checkIn= ChkInDate , checkout= ChkOutTime })
+
+
+
+@if (Model.Count() == 0)
+{
+    <div class="alert alert-warning">
+        No Hotel Found
+    </div>
+}
+else
+{
+    <div class="row" style="margin-top:10px;background-color:#EDE9E4">
+        <div class="col-7">
+            @foreach (var hotel in Model)
+            {
+
+                <div class="card shadow-sm mb-3" style="width:700px;margin-left:10px;margin-top:80px;height:230px; " id="boxshadow">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                @*<img class="card-img-top" src="~/pexels-photo-164595.jpeg" alt="Card image cap" style="height:222px;margin-top:-27px;margin-left:-27px">*@
+                                @if (hotel.HotelImage == null)
+                                {
+
+                                    <img src="~/dist/img/hotel.jpg" style="width:150px;height:220px;margin-left:-15px;margin-top:-15px" alt="woman avatar">
+                                }
+                                else
+                                {
+                                    var base64 = Convert.ToBase64String(hotel.HotelImage);
+                                    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                                    <img src='@imgsrc' style="width:150px;height:220px;margin-left:-15px;margin-top:-15px" alt="User Image">
+                                    @*<img id="adminpicture" src='@imgsrc' alt="woman avatar">*@
+                                }
+                            </div>
+                            <div class="col-md-3" style="margin-left:60px">
+                                <h5><strong style="color:#02598f;"><i class="fa fa-home"></i> @hotel.HotelName</strong></h5>
+                                <div class="row">
+
+                                    <b style="color:#02598f;margin-left:2px">
+                                        @for (int i = 0; i < 5; i++)
+                                        {
+                                            if (hotel.ReviewStar > i)
+                                            {
+                                                <i class="fa fa-star" aria-hidden="true" style="color:#D4AC0D"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-star-o" aria-hidden="true" style="color:black"></i>
+                                            }
+
+
+                                        }
+                                        @hotel.ReviewStar
+                                    </b>
+                                    <p style="color:grey;margin-left:20px">
+                                        @hotel.TotalReview Reviews
+                                    </p>
+                                </div>
+                                <hr style="margin-left:-20px" />
+                                <div class="row">
+                                    <strong style="color:#02598f">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i> @hotel.HotelCity
+                                    </strong>
+
+                                </div>
+                                <div class="row">
+                                    <strong style="color:grey"><i class="fa fa-hotel" style="color:green"></i> No of  AVialable Rooms : @hotel.NoOfRoomsFree</strong>
+                                </div>
+
+                            </div>
+                            <div style="height:184px;width:1px;background-color:lightgray;margin-left:370px;margin-top:-200px"></div>
+                            <div class="col-md-5" style="margin-top:-200px;margin-left:400px">
+                                <h5><strong style="color:#D4AC0D;"><i class="fa fa-money"></i> Price Per Day/Night</strong></h5>
+                                <strong style="color:grey">our Average Price  </strong>
+                                <strong>Rs: @hotel.AveragePrice</strong>
+                                <hr style="margin-top:25px" />
+
+
+                                @await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.ViewRoomForm", new { hotelid = hotel.HotelId,
+                               RoomTypeId = hotel.HotelRoomTypeId ,CheckInDate = hotel.CheckIn ,
+                               CheckOutDate=hotel.CheckOut })
+                                <div style="margin-top:20px;margin-left:20px">
+                                    <a style="margin-left:20px;width:100px; color:#02598f"
+                                       asp-area="" asp-controller="HotelDetail" asp-action="Index" asp-route-id="@hotel.HotelId">
+                                        <span style="font-weight:600"><i class="fa fa-audio-description"></i> Detail</span>
+                                    </a>
+                                    <a style="margin-left:20px;width:100px;color:#02598f"
+                                       asp-area="" asp-controller="HotelReview" asp-action="Index" asp-route-id="@hotel.HotelId">
+                                        <span style="font-weight:600"><i class="fa fa-reddit"></i> Review</span>
+                                    </a>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="col-5" style="margin-left:-60px;margin-top:80px">
+            @await Component.InvokeAsync("HotelCloudBedSystem.ViewComponents.MultiHotelMap", new { city = city, hotels = hotels })
+        </div>
+    </div>
+
+}
+
+<div class="modal" id="multimapModal">
+
+</div>
+
+@section Scripts{
+
+    <script>
+      
+
+        //input type range price
+        //--------------------------------
+        $(function () {
+            var Value = null;
+            var result = document.getElementById("PriceValue");
+            $("[type=range]").change(function () {
+                Value = $(this).val();
+                result.innerHTML = "PKR " + Value;
+            });
+
+            $("#Searchbtn").on('click', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                $.ajax({
+                    url: '/Dashboard/GetCoursesByPrice',
+                    type: 'GET',
+                    data: { price: Value },
+                    success: function (response) {
+                        $(".CourseList").html(response);
+                        console.log(Value);
+                        console.log("button is working");
+                    },
+                    error: function () {
+
+                    }
+
+                });
+            });
+        });
+
+
+
+
+    </script>
+}

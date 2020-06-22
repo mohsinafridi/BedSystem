@@ -1,0 +1,241 @@
+﻿@model HotelCloudBedSystem.Areas.Manager.ViewModels.HotelRoomListViewModel
+
+@{
+    ViewData["Title"] = "RoomProfile";
+}
+
+
+
+
+
+<section class="content-header">
+    <h1>
+        HotelRoom Profile
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Examples</a></li>
+        <li class="active">Hotel Profile</li>
+    </ol>
+</section>
+<div class="row" style="margin-left:-5px;">
+    <div class="col-md-3">
+
+        <!-- Profile Image -->
+        <div class="box box-primary" style="width:340px;">
+            <div class="box-body box-profile">
+                @if (Model.RoomImage == null)
+                {
+
+                    <img src="~/dist/img/hotel.jpg" style="width:300px;height:300px;margin-left:10px;" alt="woman avatar">
+                }
+                else
+                {
+                    var base64 = Convert.ToBase64String(Model.RoomImage);
+                    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                    <img src='@imgsrc' style="width:300px;height:300px;margin-left:10px;" alt="User Image">
+                    @*<img id="adminpicture" src='@imgsrc' alt="woman avatar">*@
+                }
+
+                <h3 class="profile-username text-center">@Model.RoomName</h3>
+
+                <p class="text-muted text-center">Room No:@Model.RoomNo</p>
+                <a class="btn btn-primary btn-block" asp-area="Manager" asp-controller="HotelRoomProfilePictureUpload"
+                   asp-action="Index" asp-route-id="@Model.RoomId" id="profilepicbtn"> <i class="fa fa-upload"></i> Upload picture</a>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+        <!-- About Me Box -->
+        <div class="box box-primary" style="width:1060px;margin-top:140px">
+            <div class="box-header with-border">
+                <h3 class="box-title">@Model.RoomName Address Info</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <strong><i class="fa fa-book margin-r-5"></i>Room Name</strong>
+
+                <p class="text-muted">
+                    @Model.RoomName
+                </p>
+
+                <hr>
+
+                <strong><i class="fa fa-map-marker margin-r-5"></i>Room Type</strong>
+
+                <p class="text-muted">@Model.RoomTye</p>
+
+                <hr>
+
+                <strong><i class="fa fa-map-signs margin-r-5"></i>Room Description</strong>
+
+                <p class="text-muted">@Model.Description</p>
+
+                <hr>
+                <strong><i class="fa fa-picture-o margin-r-5"></i>Room Pictures</strong>
+                <hr />
+                @await Component.InvokeAsync("HotelCloudBedSystem.Areas.Manager.ViewComponents.HotelRoomImages", new { id = Model.RoomId })
+
+
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-9">
+        <div class="nav-tabs-custom" style="width:650px;margin-left:130px;">
+            <div class="tab-content">
+
+                <div id="settings">
+                    <form class="form-horizontal"
+                          asp-area="Manager" asp-controller="HotelRoomProfile" asp-action="Index" method="post">
+                        @Html.HiddenFor(model => model.RoomId)
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger small text-uppercase" })
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">Room Name</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputName" placeholder="FirstName" asp-for="RoomName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail" class="col-sm-2 control-label" asp-for="RoomNo">Room No</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputEmail" placeholder="Email" asp-for="RoomNo">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName" class="col-sm-2 control-label">Room Type</label>
+
+                            <div class="col-sm-10">
+                                <input type="email" class="form-control" id="inputName" disabled placeholder="Email" asp-for="RoomTye">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSkills" class="col-sm-2 control-label">OccapancyLimit</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputSkills" placeholder="PhoneNo" asp-for="OccupancyLimit">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSkills" class="col-sm-2 control-label">Rs PerNight</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="inputSkills" placeholder="EmailConfirmed" asp-for="PerNightPrice">
+                            </div>
+                        </div>
+
+                        <h4>
+                            <strong style="margin-left:120px;
+                        margin-top:10px">Facilities</strong>
+                        </h4>
+                        <div class="row" style="margin-left:70px;margin-top:20px">
+
+
+                            <input type="checkbox" asp-for="FreeWifi" style="margin-left:35px"> <span> <i class="fa fa-wifi"></i>Free Wifi</span>
+                            <input type="checkbox" asp-for="Tv" style="margin-left:35px"> <span> <i class="fa fa-coffee"></i>TV</span>
+                            <input type="checkbox" asp-for="Ac" style="margin-left:35px"> <span> <i class="fa fa-apple"></i>Air Condition</span>
+                            <input type="checkbox" asp-for="AttachedWashroom" style="margin-left:35px"> <span> <i class="fa fa-apple"></i>Attached Washroom</span>
+
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="margin-left:20px;width:600px;height:40px;margin-top:20px"> <i class="fa fa-cloud-upload"></i> Update Room information</button>
+                    </form>
+
+
+                </div>
+
+                <!-- /.tab-pane -->
+            </div>
+
+            <!-- /.tab-content -->
+        </div>
+
+
+        <a class="btn btn-warning" style="margin-left:160px;width:600px;height:40px;margin-top:20px"
+           id="HotelPictureUploadbtn" asp-area="Manager" asp-controller="UploadHotelRoomImage" asp-action="_UploadImage" asp-route-id="@Model.RoomId">
+            <b>
+                <i class="fa fa-upload"></i> Upload Room Pictures
+            </b>
+        </a>
+        <!-- /.nav-tabs-custom -->
+    </div>
+</div>
+
+<div class="modal" id="hotelupdatemodel">
+
+</div>
+<div class="modal" id="HotelRoomprofilePicmodal">
+
+</div>
+
+<div class="modal" id="HotelPicUploadmodal">
+
+</div>
+
+@section Scripts {
+    <script src="~/bootbox.min.js"></script>
+    <script>
+
+        //Create
+        $("#HotelUpdate").on("click", function (e) {
+            e.preventDefault();
+            var btn = $(this);
+            console.log("Button 1 is working...");
+            $.ajax({
+
+                url: btn.attr('href'),
+                type: 'GET',
+                success: function (response) {
+                    $("#hotelupdatemodel").html(response);
+                    $("#hotelupdatemodel").modal('show');
+                }
+            });
+        });
+
+
+
+
+        $("#profilepicbtn").on("click", function (e) {
+            e.preventDefault();
+            var btn = $(this);
+            console.log("Button 1 is working...");
+            $.ajax({
+                url: btn.attr('href'),
+                type: 'GET',
+                success: function (response) {
+                    $("#HotelRoomprofilePicmodal").html(response);
+                    $("#HotelRoomprofilePicmodal").modal('show');
+                }
+            });
+        });
+
+
+
+        $("#HotelPictureUploadbtn").on("click", function (e) {
+            e.preventDefault();
+            var btn = $(this);
+            console.log("Button 1 is working...");
+            $.ajax({
+                url: btn.attr('href'),
+                type: 'GET',
+                success: function (response) {
+                    $("#HotelPicUploadmodal").html(response);
+                    $("#HotelPicUploadmodal").modal('show');
+                }
+            });
+        });
+
+    </script>
+}
+
+
+
+
+
+

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<HotelCloudBedSystem.Areas.User.ViewModels.AddReviewViewModel>
+@{
+    ViewData["Title"] = "Room Reviews";
+}
+
+@{
+    int hotelId = 0;
+
+    foreach (var rev in Model)
+    {
+        hotelId = rev.HotelId;
+        break;
+    }
+}
+
+
+<div>
+    <h2 style="margin-top: 0px;margin-left: 50px;">
+        <i class="fa fa-reddit" aria-hidden="true" style="color:#922B21"></i>
+        <b style="margin-left: 3px;color:#D4AC0D"> Hotel Review</b>
+        <a class="btn btn-success " style="color:white;margin-left:300px"
+           asp-area="User" asp-controller="AddHotelReview" asp-action="Index"
+           asp-route-id="@hotelId">
+           <i class="fa fa-plus"></i> Add HotelReview
+        </a>
+
+    </h2>
+    <hr style="margin-top: 0rem;">
+</div>
+
+@if (Model.Count() == 0)
+{
+    <div class="alert alert-warning">
+        No Review found!
+    </div>
+}
+else
+{
+    foreach (var review in Model)
+    {
+        <div class="row" style="margin-top:15px;margin-left:20px">
+            <img src="~/image/aa.png" style="width:60px;height:60px" />
+            <strong style="margin-top:16px;margin-left:10px">
+                @review.UserName
+            </strong>
+        </div>
+
+        <strong style="color:peru;margin-left:100px">
+
+            @for (int i = 0; i < review.ReviewStar; i++)
+            {
+                <i class="fa fa-star"></i>
+            }
+            <span style="color:#A93226">
+                @review.ReviewStar
+            </span>
+
+        </strong>
+
+        <p style="color:gray;margin-left:20px">
+            @review.Review
+        </p>
+        <hr />
+    }
+}
+

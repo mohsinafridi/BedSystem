@@ -1,0 +1,181 @@
+﻿@model HotelCloudBedSystem.Areas.User.ViewModels.UserProfileViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<style>
+    * {
+    box-sizing: border-box;
+  }
+
+  /* Style inputs */
+  input[type=text], select, textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+  }
+
+  input[type=submit] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+  }
+
+  input[type=submit]:hover {
+    background-color: #45a049;
+  }
+
+  /* Style the container/contact section */
+  .container {
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  /* Create two columns that float next to eachother */
+  .column {
+    float: left;
+    width: 50%;
+    margin-top: 6px;
+    padding: 20px;
+  }
+
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+  @*@media screen and (max-width: 600px) {
+    .column, input[type=submit] {
+      width: 100%;
+      margin-top: 0;
+    }
+
+
+  }*@
+
+  #handlerimage{
+      border-radius: 50%;
+  }
+
+.upload{
+    font-weight:bold;
+    color:#28a745;
+    margin-left: 15px;
+    line-height: 36px;
+}
+</style>
+<div>
+    <h2 style="margin-top: 0px;margin-left: 50px;">
+        <i class="fa fa-id-card" aria-hidden="true" style="color:#922B21"></i> <b style="margin-left: 3px;color:#D4AC0D"> Profile</b>
+    </h2>
+    <hr style="margin-top: 0rem;">
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="column" style="margin-left: 10px;">
+            <div class="card" style="width: 22rem;">
+                @if (Model.AvatarImage == null)
+                {
+                    <img src="~/dist/img/avatar5.png" style="border-radius: 50%;width:120px;height:120px;margin-left:20px;" alt="woman avatar">
+                }
+                else
+                {
+                    var base64 = Convert.ToBase64String(Model.AvatarImage);
+                    var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                    <img src='@imgsrc'
+                         style="border-radius: 50%;width:135px;height:130px;
+   margin-left:4px;margin-top:5px" class="img-circle" alt="User Image">
+                    @*<img id="adminpicture" src='@imgsrc' alt="woman avatar">*@
+                }
+
+                @*<img src="./assets/handler.png" id="handlerimage" style="width: 150px; height: 150px;margin-left: 10px;">*@
+                <div class="card-body">
+                    <input type="file" #file placeholder="Choose file" style="display:none;">
+                    <a class="btn btn-info text " asp-area="User" asp-controller="Home"
+                       asp-action="_UpdateProfilePic" id="profilepicbtn" style="width: 150px;margin-left: -15px">
+                        <i class="fa fa-upload" aria-hidden="true"></i> Upload Image
+                    </a>
+                    <hr>
+                    <h4 class="card-title" style="margin-left: 180px;margin-top: -170px;">
+                        @Model.FirstName @Model.LastName
+                    </h4>
+                    <h6 style="margin-left: 150px;margin-top: 20px;color: grey;">
+                        @Model.Email
+                    </h6>
+                    <h5 style="margin-top: 120px;"> About You</h5>
+                    <p class="card-text" style="color: grey;">
+                        @Model.role
+                    </p>
+                </div>
+                <h5 style="margin-left: 20px;"><strong><u>Detail</u></strong></h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><h6>City</h6> <p style="color: grey;">@Model.City</p></li>
+                    <li class="list-group-item"><h6>Address</h6> <p style="color: grey;">@Model.Address</p>  </li>
+                </ul>
+                <h5 style="margin-left: 20px;"><strong><u>Contacts</u></strong></h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><h6>Phone No</h6> <p style="color: grey;">@Model.PhoneNo </p> </li>
+                    <li class="list-group-item"><h6>Email</h6> <p style="color: grey;">@Model.Email</p></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="column" style="margin-left: -40px;margin-top: -30px;">
+            <form autocomplete="off" asp-area="User" asp-controller="Home" asp-action="Index"
+                  method="post">
+                <input type="hidden" name="userId" placeholder="Your name..">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" asp-for="FirstName" placeholder="FirstName ..">
+                <label for="fname">Last Name</label>
+                <input type="text" id="fname" asp-for="LastName" name="lastName" placeholder="Last name..">
+                <label for="lname">Email</label>
+                <input type="text" id="email" asp-for="Email" placeholder="Email..">
+                <label for="lname">Phone No</label>
+                <input type="text" id="lname" asp-for="PhoneNo" placeholder="Phone No..">
+                <label for="lname">City</label>
+                <input type="text" id="lname" asp-for="City" placeholder="City..">
+                <label for="lname">Address</label>
+                <input type="text" id="lname" asp-for="Address" placeholder="Address..">
+                <label>About You</label>
+                <textarea type="text" id="form7" class="md-textarea form-control" asp-for="Aboutyou" rows="5" cols="40"></textarea>
+                <button type="submit" class="btn btn-primary btn-md text-white btn-block" style="margin-right: 8px"><i class="fa fa-pencil"><span class="ml-1"></span></i>Update</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+<div class="modal" id="profilePicmodal">
+
+</div>
+@section Scripts{
+    <script>
+
+            $("#profilepicbtn").on("click", function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                console.log("Button 1 is working...");
+                $.ajax({
+                    url: btn.attr('href'),
+                    type: 'GET',
+                    success: function (response) {
+                        $("#profilePicmodal").html(response);
+                        $("#profilePicmodal").modal('show');
+                    }
+                });
+            });
+
+
+    </script>
+
+}

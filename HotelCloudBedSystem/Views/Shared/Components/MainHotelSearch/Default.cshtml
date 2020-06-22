@@ -1,0 +1,112 @@
+﻿@model HotelCloudBedSystem.ViewModels.HotelSerachViewModel
+
+
+<head>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <link href="~/css/AutoCompleteStyling.css" rel="stylesheet" />
+</head>
+
+
+<style>
+    #boxshadow {
+        position: relative;
+        box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+        padding: 10px;
+        background: white;
+    }
+
+        #boxshadow::after {
+            content: '';
+            position: absolute;
+            z-index: -1; /* hide shadow behind image */
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+            width: 70%;
+            left: 15%; /* one half of the remaining 30% */
+            height: 100px;
+            bottom: 0;
+        }
+
+    .scbtn {
+        /* Green */
+        border: none;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border: 1px solid #6d7b84;
+    }
+
+    .input-icons i {
+        position: absolute;
+    }
+
+    .input-icons {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .icon {
+        padding: 19px;
+        min-width: 90px;
+    }
+</style>
+
+<div style="margin-top:40px;">
+
+    <h4 style="color:grey;margin-left:440px"><strong><i class="fa fa-search"></i> Try searching for a city, a specific hotel </strong></h4>
+</div>
+<form asp-area="" asp-controller="HotelSearch" asp-action="Search" method="post"
+      style="margin-left:120px;margin-top:70px;width:1150px">
+    <div class="row" style="margin-top:30px">
+        <div class="input-group mb-3 col-md-3" >
+            <div class="input-icons">
+                <i class="fa fa-search icon" style="color:grey;font-size:19px"></i>
+
+                <input type="text" style="height:55px;padding-left:50px" asp-for="City" class="form-control effect-2" id="cityautocomplete" aria-label="Default"
+                       aria-describedby="inputGroup-sizing-default"
+                       placeholder="Enter Hotel destination">
+            </div>
+        </div>
+        <div class="input-group mb-3 col-md-2" style="height:50px">
+            <div class="input-icons">
+                <i class="fa fa-calendar icon" style="color:grey"></i>
+
+                <input type="text" asp-for="@Model.checkIn" style="height:55px;padding-left:40px"  class="form-control effect-2" id="start-date" aria-label="Default"
+                       aria-describedby="inputGroup-sizing-default" placeholder="Check in --/--/--">
+            </div>
+        </div>
+        <div class="input-group mb-3 col-md-2" style="height:50px">
+            <div class="input-icons">
+                <i class="fa fa-calendar icon" style="color:grey"></i>
+                <input  style="height:55px;padding-left:40px" asp-for="@Model.checkOut"  class="form-control" type="text" id="end-date" aria-label="Default"
+                       aria-describedby="inputGroup-sizing-default" placeholder="Check out --/--/--">
+            </div>
+        </div>
+        <div class="input-group mb-3 col-sm-3">
+            <div class="input-icons">
+                <i class="fa fa-hotel icon" style="color:grey"></i>
+                <select style="height:55px;padding-left:40px" asp-for="@Model.RoomTypeId" class="form-control" asp-items="@Model.Roomtypes">
+                   
+                </select>
+            </div>
+        </div>
+        <button type="submit" id="sbtn" class="col scbtn" style="width:200px;height:52px;background-color:white">
+            <img src="~/image/multimedia.png" style="width:25px;height:25px;" class="float-left" /> <b style="color:#02598f;" id="stext"> Search Hotels</b>
+        </button>
+
+
+
+    </div>
+</form>
+
+
+@section Scripts{
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="~/js/AutoCompleteJavascript.js"></script>
+    
+
+}
+
+

@@ -1,0 +1,194 @@
+﻿@model HotelCloudBedSystem.Areas.Admin.ViewModels.AddUserViewModel
+@{
+    Layout = null;
+}
+
+
+<head>
+    <style>
+        * {box-sizing: border-box;}
+
+/* Style the input container */
+        .input-container {
+            display: flex;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        /* Style the form icons */
+        .icon {
+            padding: 10px;
+            background: dodgerblue;
+            color: white;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        /* Style the input fields */
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            outline: none;
+        }
+
+            .input-field:focus {
+                border: 2px solid dodgerblue;
+            }
+
+        .boxshadow {
+            position: relative;
+            -moz-box-shadow: 1px 2px 4px rgba(0, 0, 0,0.5);
+            -webkit-box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+            box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+            padding: 10px;
+            background: white;
+        }
+
+        .modal-dialog {
+            position: fixed;
+            top: 5%;
+            left: 30%;
+            width: 600px;
+            max-width: 100%;
+            transform: translate(-50%, -50%);
+        }
+
+        Make the image fit the box
+        .boxshadow form {
+            width: 100%;
+            border: 1px solid #8a4419;
+            border-style: inset;
+        }
+
+        .boxshadow::after {
+            content: '';
+            position: absolute;
+            z-index: -1; /* hide shadow behind image */
+            -webkit-box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+            -moz-box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);
+            width: 70%;
+            left: 15%; /* one half of the remaining 30% */
+            height: 100px;
+            bottom: 0;
+        }
+    </style>
+</head>
+
+<div class="modal-dialog" id="RoleModal" style="width:500px;">
+    <div class="modal-content">
+        <div class="modal-header progress-bar-success" style="background-color:dodgerblue">
+            <h5 class="modal-title" style="color:white">Add New App <small>USER</small></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body boxshadow" id="UserAddForm">
+            <form asp-area="Admin" asp-controller="AppUser" asp-action="AddAppUser"
+                  method="post" class="FormCreate">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger small text-uppercase" })
+                <div class="form-group">
+                    <label asp-for="FirstName"></label>
+                    <div class="input-container">
+                        <i class="fa fa-user icon"></i>
+                        <input asp-for="FirstName" class="form-control" />
+                    </div>
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="LastName"></label>
+                    <div class="input-container">
+                        <i class="fa fa-user icon"></i>
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                   
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <div class="input-container">
+                        <i class="fa fa-location-arrow icon"></i>
+                        <input asp-for="Email" class="form-control" />
+                    </div>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                       
+                    </div>
+                <div class="form-group">
+                    <label asp-for="Password"></label>
+                    <div class="input-container">
+                        <i class="fa fa-lock icon"></i>
+                        <input asp-for="Password" class="form-control" />
+                    </div>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword"></label>
+                        <div class="input-container">
+                            <i class="fa fa-lock icon"></i>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                        </div>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="modal-footer"  style="margin-left:0px;">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-danger">Reset</button>
+                    </div>
+
+</form>
+        </div>
+    </div>
+</div>
+
+@*<div class="modal" id="UseraddingModal">
+
+    </div>*@
+
+
+@section Scripts{
+    <script src="~/bootbox.min.js"></script>
+    <script>
+
+                            ////$(".FormCreate").on("submit", function (e) {
+                            ////$("#RoleModal").delegate(".FormCreate", "submit", function (e) {
+                            //    e.preventDefault();
+                            //    console.log("Button is working");
+                            //    var frm = $(this);
+
+                            //    $.ajax({
+                            //        url: frm.attr('action'),
+                            //        type: frm.attr('method'),
+                            //        data: frm.serialize(),
+                            //        success: function (response) {
+                            //            if (response.status == true) {
+
+                            //                bootbox.alert(response.message);
+
+                            //                // refresh data grid
+                            //                $.ajax({
+                            //                    url: '/Admin/UserList/NotinRole/',
+                            //                    type: 'GET',
+                            //                    success: function (data) {
+                            //                        $("#NotinRoleUser").html(data);
+                            //                    },
+                            //                    error: function () {
+
+                            //                    }
+                            //                });
+
+                            //                // hide modal
+                            //                $("#CreateModal").modal('hide');
+                            //            } else {
+                            //                console.warn(response.message);
+                            //            }
+                            //        },
+                            //        error: function () {
+
+                            //        }
+                            //    });
+
+                            //});
+    </script>
+
+}

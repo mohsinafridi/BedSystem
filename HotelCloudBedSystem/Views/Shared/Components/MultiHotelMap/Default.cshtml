@@ -1,0 +1,129 @@
+﻿@model  IEnumerable<HotelCloudBedSystem.ViewModels.HotelMaplocationViewModel>
+
+    <head>
+        @*<script src="https://maps.googleapis.com/maps/api/js?"></script>*@
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuoOeYDXkpylbep3Fx4tx-jHvhRe7t5uE"
+                type="text/javascript"></script>
+
+        <style>
+
+            .content {
+                padding: 16px;
+            }
+
+            /* The sticky class is added to the header with JS when it reaches its scroll position */
+            .sticky {
+                position: fixed;
+                top: 0;
+                width: 100%
+            }
+
+                /* Add some top padding to the page content to prevent sudden quick movement (as the header gets a new position at the top of the page (position:fixed and top:0) */
+                .sticky + .content {
+                    padding-top: 102px;
+                }
+        </style>
+    </head>
+<body>
+    @{ 
+        string citylat = null;
+        string citylong = null;
+        
+    }
+    @foreach(var location in Model)
+    {
+        citylat = location.CityLatitude;
+        citylong = location.CityLongitude;
+        break;
+
+    }
+    <div id="myDiv"  style="width:600px;height:600px;"></div>
+   
+    <script type="text/javascript">
+        var myAddress = new google.maps.LatLng(@citylat, @citylong);
+
+        var mapOptions = {
+            center: myAddress,
+            zoom: 11,
+            minZoom: 5,
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeControl: false,
+            
+        };
+
+        var map = new google.maps.Map(document.getElementById("myDiv"), mapOptions);
+
+         var image = {
+             url: 'https://image.flaticon.com/icons/svg/1775/1775269.svg',
+    // This marker is 20 pixels wide by 32 pixels high.
+             size: new google.maps.Size(151, 150),
+             origin: new google.maps.Point(0, 0),
+             anchor: new google.maps.Point(19, 30),
+             scaledSize: new google.maps.Size(40, 40)
+        };
+        var shape = {
+            coords: [1, 1, 1, 20, 18, 20, 18, 1],
+            type: 'poly'
+        };
+        @foreach(var location in Model) {
+            <text>
+                var marker = new google.maps.Marker({
+                    map:map,
+                    position: {lat: @location.HotelLatitude, lng: @location.HotelLongitude },
+                    title: '@location.HotelName +Hotel',
+                    icon: image,
+                    //animation: google.maps.Animation.BOUNCE
+
+                });
+
+
+                (function (marker) {
+                    // add click event
+                    google.maps.event.addListener(marker, 'mouseover', function () {
+                        infowindow = new google.maps.InfoWindow({
+                            content: '<div style="width:400px;">' +
+            '<div class="row" style="width:400px">' +
+            '<div class="col-5">' +
+            '<img src="/image/r6.jpg" style="width:140px;height:120px" />' +
+            '</div>' +
+            '<div class="col-6">' +
+            '<h6 style="font-weight: bold;color:#A93226"> <i class="fa fa-home"></i> @location.HotelName</h6>' +
+            '<p style="font-weight: bold;color:#D4AC0D"> <i class="fa fa-map-marker" aria-hidden="true"></i> @location.CityName</p>' +
+            '<div class="row" style="margin-left:10px"> @for (int i = 0; i < location.AverageSatr; i++) {<i class="fa fa-star" style="color:#D4AC0D"></i> } <b style="margin-left:3px;color:brown">4</b>' +
+            '<p style="margin-left:25px;color:grey"> @location.totalreviews Reviews</p></div > <hr />' +
+            '</div>' +
+            '</div>' +
+            '<div class="row" style="margin-left:30px;margin-top:10px">' +
+            '<strong style="font-weight: bold">our lowest price' +
+            '<span style = "color:red" > RS: @location.AveragePrice</span ></strong > <p style="margin-left:5px">per Night</p>' +
+            '</div>' +
+                                '</div>'
+
+
+                        });
+                        infowindow.open(map, marker);
+                    });
+                    marker.addListener('mouseout', function () {
+                        infowindow.close();
+                    });
+            })(marker)
+            </text>
+        }
+        window.onscroll = function () { myFunction() };
+
+        // Get the header
+        var header = document.getElementById("myDiv");
+
+        // Get the offset position of the navbar
+        var sticky = header.offsetTop;
+
+        // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                header.classList.add("sticky");
+            } else {
+                header.classList.remove("sticky");
+            }
+        }
+    </script>
+</body>
